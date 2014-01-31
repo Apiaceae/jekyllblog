@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>vim-addon-manager使用方法</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <p>Debian系统中，对VIM插件加载方式采用独特的管理方式，Vim-addon-manager。</p>
+<p>此工具安装后默认会检测 /usr/share/vim/registry/  下haml配置文件，如若存在插件同名配置文件或vim-rumtime配置文件，则加载并读取，随后可以使用 vim-addons list  显示，使用 vim-addons install 来安装。</p>
+<p>假设需要安装 NERDTree 插件，步骤如下：</p>
+<p>1. 下载插件文件，复制到 /usr/share/vim/addons/ 下</p>
+<p>2. 在 /usr/share/vim/registry/ 中新建 NERDTree.haml 文件，内容如下：</p>
+<p style="padding-left: 30px; text-indent: 0pt;"><span style="color: #888888;"># vim-addons list 显示的插件名称<br /> addon: NERDTree<br /> # 插件描述<br /> description: &ldquo;NERDTree is a file explorer&rdquo;<br /> # 文件位置，默认当前目录为Vim-addon-manager的源地址（可使用 vim-addons -s 设置）:<br /> files:<br /> - plugin/NERD_tree.vim<br /> - doc/NERD_tree.txt</span></p>
+<p>3. 在终端运行 vim-addons install NERDTree 完成安装。</p>
+<p>原文地址：http://www.grick.net/archives/809</p>
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

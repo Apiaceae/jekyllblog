@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>XML学习笔记(九):XML和ADO.NET</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>XML学习笔记(九):XML和ADO.NET <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <h2>将DataSet的内容存储为XML文件: </h2>
+
+
+<p>  <h2><font color="#ff0000">WriteXml(), WriteXmlSchema(), GetXml(), GetXmlSchema()</font></h2>  <p>XmlWriteMode的几个主要的属性</p>  <p>IgnoreSchema: 将DataSet内容写入XML文件，不包括XSD架构信息</p>  <p>WriteSchema: 同时将DataSet内容和XSD架构信息写入    <br />DiffGram: 写入为DiffGram格式</p>  <p>Saving Only the Schema:仅仅写入XSD架构信息，不包括实际的数据</p>  <p>示例如下：</p>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/XMLXMLADO.NET/369195AC/20090512_161852.jpg"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="2009-05-12_161852" border="0" alt="2009-05-12_161852" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/XMLXMLADO.NET/7EDEDB7B/20090512_161852_thumb.jpg" width="644" height="328" /></a> </p>  <div class="csharpcode">&#160;</div>  <h5>DataSetWriteXML.aspx</h5>  <div class="csharpcode">&#160;</div>  <div class="csharpcode">   <pre class="alt"><span class="asp">&lt;%@ Page Language=&quot;C#&quot; AutoEventWireup=&quot;true&quot; CodeFile=&quot;DataSetWriteXML.aspx.cs&quot;</pre></p>
+
+<p>  <pre>    Inherits=&quot;DataSetWriteXML&quot; %&gt;</span></pre></p>
+
+<p>  <pre class="alt">&#160;</pre></p>
+
+<p>  <pre><span class="kwrd">&lt;!</span><span class="html">DOCTYPE</span> <span class="attr">html</span> <span class="attr">PUBLIC</span> <span class="kwrd">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="kwrd">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">html</span> <span class="attr">xmlns</span><span class="kwrd">=&quot;http://www.w3.org/1999/xhtml&quot;</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre><span class="kwrd">&lt;</span><span class="html">head</span> <span class="attr">runat</span><span class="kwrd">=&quot;server&quot;</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre class="alt">    <span class="kwrd">&lt;</span><span class="html">title</span><span class="kwrd">&gt;&lt;/</span><span class="html">title</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre><span class="kwrd">&lt;/</span><span class="html">head</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">body</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre>    <span class="kwrd">&lt;</span><span class="html">form</span> <span class="attr">id</span><span class="kwrd">=&quot;form1&quot;</span> <span class="attr">runat</span><span class="kwrd">=&quot;server&quot;</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre class="alt">    <span class="kwrd">&lt;</span><span class="html">div</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre>        <span class="kwrd">&lt;</span><span class="html">fieldset</span> <span class="attr">title</span><span class="kwrd">=&quot;DataSet to XML&quot;</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre class="alt">            <span class="kwrd">&lt;</span><span class="html">asp:TextBox</span> <span class="attr">ID</span><span class="kwrd">=&quot;TextBox1&quot;</span> <span class="attr">runat</span><span class="kwrd">=&quot;server&quot;</span> <span class="attr">Height</span><span class="kwrd">=&quot;20px&quot;</span> <span class="attr">Width</span><span class="kwrd">=&quot;284px&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">asp:TextBox</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre>            <span class="kwrd">&lt;</span><span class="html">br</span> <span class="kwrd">/&gt;</span></pre></p>
+
+<p>  <pre class="alt">            <span class="kwrd">&lt;</span><span class="html">asp:RadioButtonList</span> <span class="attr">ID</span><span class="kwrd">=&quot;RadioButtonList1&quot;</span> <span class="attr">runat</span><span class="kwrd">=&quot;server&quot;</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre>                <span class="kwrd">&lt;</span><span class="html">asp:ListItem</span> <span class="attr">Value</span><span class="kwrd">=&quot;0&quot;</span><span class="kwrd">&gt;</span>No Schema<span class="kwrd">&lt;/</span><span class="html">asp:ListItem</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre class="alt">                <span class="kwrd">&lt;</span><span class="html">asp:ListItem</span> <span class="attr">Value</span><span class="kwrd">=&quot;1&quot;</span><span class="kwrd">&gt;</span>With Schema<span class="kwrd">&lt;/</span><span class="html">asp:ListItem</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre>                <span class="kwrd">&lt;</span><span class="html">asp:ListItem</span> <span class="attr">Value</span><span class="kwrd">=&quot;2&quot;</span><span class="kwrd">&gt;</span>DiffGram<span class="kwrd">&lt;/</span><span class="html">asp:ListItem</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre class="alt">                <span class="kwrd">&lt;</span><span class="html">asp:ListItem</span> <span class="attr">Value</span><span class="kwrd">=&quot;3&quot;</span><span class="kwrd">&gt;</span>Only Schema<span class="kwrd">&lt;/</span><span class="html">asp:ListItem</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre>            <span class="kwrd">&lt;/</span><span class="html">asp:RadioButtonList</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre class="alt">            <span class="kwrd">&lt;</span><span class="html">br</span> <span class="kwrd">/&gt;</span></pre></p>
+
+<p>  <pre>            <span class="kwrd">&lt;</span><span class="html">asp:Button</span> <span class="attr">ID</span><span class="kwrd">=&quot;Button1&quot;</span> <span class="attr">runat</span><span class="kwrd">=&quot;server&quot;</span> <span class="attr">Text</span><span class="kwrd">=&quot;Write to XML&quot;</span> <span class="attr">OnClick</span><span class="kwrd">=&quot;Button1_Click&quot;</span> <span class="kwrd">/&gt;</span></pre></p>
+
+<p>  <pre class="alt">            <span class="kwrd">&lt;</span><span class="html">asp:Button</span> <span class="attr">ID</span><span class="kwrd">=&quot;Button2&quot;</span> <span class="attr">runat</span><span class="kwrd">=&quot;server&quot;</span> <span class="attr">Text</span><span class="kwrd">=&quot;Load XML&quot;</span> <span class="attr">OnClick</span><span class="kwrd">=&quot;Button2_Click&quot;</span> <span class="kwrd">/&gt;</span></pre></p>
+
+<p>  <pre>        <span class="kwrd">&lt;/</span><span class="html">fieldset</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre class="alt">    <span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre>    <span class="kwrd">&lt;/</span><span class="html">form</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre class="alt"><span class="kwrd">&lt;/</span><span class="html">body</span><span class="kwrd">&gt;</span></pre></p>
+
+<p>  <pre><span class="kwrd">&lt;/</span><span class="html">html</span><span class="kwrd">&gt;</span></pre>
+</div></p>
+
+
+
+
+
+<h5>DataSetWriteXML.aspx.cs</h5>
+
+
+
+
+<p><div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">using</span> System;</pre></p>
+
+<p>  <pre><span class="lnum">   2:  </span><span class="kwrd">using</span> System.Collections.Generic;</pre></p>
+
+<p>  &lt;pre class="alt</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/05/12/SQL%E6%8B%86%E5%88%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9E%84%E6%88%90%E6%96%B0%E7%9A%84%E8%AE%B0%E5%BD%95" title="SQL拆分字符串构成新的记录">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2009/05/13/vs2010%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%99%BB%E9%99%86%E5%B8%90%E6%88%B7%E5%92%8C%E5%AF%86%E7%A0%81" title="vs2010虚拟机登陆帐户和密码">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>12 May 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

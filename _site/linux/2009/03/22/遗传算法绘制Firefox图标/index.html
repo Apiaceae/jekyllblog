@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>遗传算法绘制Firefox图标</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>遗传算法绘制Firefox图标 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <p>从前，一群扇贝在海岸边悠哉游哉地生活着。它们衣食不愁，连房子也有了着落，担忧的只有一件事：每隔一段时间，总有人来挖走它们之中的一部分。<strong>有意思的 是，这个人的家族以Firefox的图标作为纹章，所以他总是选择那些花纹长得比较不像Firefox图标的扇贝。经过几十万代的繁衍后，扇贝壳上的图案 逐渐变得与Firefox图标相差无几<img src="/Blogs/image.axd?picture=2009%2f3%2f10190502766056.gif" alt="" width="300" height="307" />。</strong></p>
+
+<div style="text-align: center">
+&nbsp;&nbsp; （ &ldquo;扇贝实验&rdquo;中的子代输出结果。每个图形下面的数字代表其代数。很显然，最初那些由随机三角形组成的&ldquo;生物&rdquo;，在&ldquo;繁殖&rdquo;了12万代之后，看起来已经与Firefox图标相差无几了） 
+</div>
+
+
+<p><br />
+&nbsp; 这个故事确有其事&mdash;&mdash;&mdash;它们生活在我的电脑中，是一个遗传算法程序的一部分。程序的目的就是用100个半透明三角形画出Firefox图标。<br />
+<br />
+遗传算法是一种解决问题的方法。它模拟大自然中种群在选择压力下的演化，从而得到问题的一个近似解。在上世纪五十年代，生物学家已经知道基因在自然演化过程中的作用了。他们希望能在新出现的计算机上模拟这个过程，用以尝试定量研究基因与进化之间的关系。这就是遗传算法的滥觞。<br />
+<br />
+首先，我们把100个半透明三角形组成的东西看成一个生物个体(比如扇贝)，可以说它的样子是由这些三角形的具体位置和颜色决定的。所以，我们可以把一个一个的半透明三角形看做是这些扇贝的&ldquo;基因&rdquo;。而组成扇贝的这100个基因就组成了每个扇贝个体的&ldquo;染色体&rdquo;。<br />
+<br />
+扇贝当然要繁衍后代。生物界中的繁衍无非就是父母的基因组合产生新的个体。所以，我们在程序中选择两个原有的扇贝，然后从这两个扇贝的染色体中随机选取一共100个基因组成新个体的染色体。为了产生新的基因，使基因的种类更多样化，在组合的时候，新的扇贝的基因有一定的概率发生变异。这就是说，其中透明三角形的位置或者颜色有可能发生随机改变。<br />
+<br />
+为了使扇贝的样子向Firefox图标靠近，我们要给它们加上一点选择压力：把每一代扇贝中最不像Firefox的淘汰出去。这个选择过程可以通过像素比较来完成。<br />
+<br />
+最后，在自然界中，种群的演化是一个无休止的过程，但程序总要停下来给出一个结果。那么，什么时候终止演化输出结果呢？这就要订立一个终止条件。一旦满足这个条件，程序就输出当前最好的结果并停止。最简单的终止条件就是，如果种群经过了很多代之后仍然没有显著改变适应性的变异的话，我们就停止并输出结果。<br />
+<br />
+好了，现在是万事俱备只欠东风了。定义好基因，写好繁衍、变异、评价适应性、淘汰和终止的代码之后，只需要随机产生一个适当大小的种群，然后让它这样一代代地繁衍、变异和淘汰下去，到最后我们就会获得一个让人惊喜的结果。<br />
+<br />
+遗传算法能在相对较短的时间内给出一个足够好、能凑合的答案，它从问世伊始就越来越受到大家的重视，对它的研究也是方兴未艾。当然，它也有缺点，比如说早期的优势基因可能会很快通过交换基因的途径散播到整个种群中，这样有可能导致早熟(premature)。这个问题是难以完全避免的。<br />
+<br />
+这也从一个侧面说明，我们不一定需要一个智能才能得到一个构造精巧的系统。无论如何，如果我们要将遗传算法的发明归功于一个人的话，我会将它归功于达尔文，进化论的奠基人。如果我们不知道自然演化的过程，我们也不可能在电脑中模拟它，更不用说将它应用于实际了。<br />
+<br />
+向达尔文致敬！　　<br />
+<br />
+新闻来源：<a href="http://www.cnbeta.com/articles/79927.htm">http://www.cnbeta.com/articles/79927.htm</a></p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/%E7%94%9F%E7%89%A9%E5%A4%9A%E6%A0%B7%E6%80%A7%E4%BF%A1%E6%81%AF%E5%AD%A6/2009/03/23/geomapping-of-life-" title="Geomapping of Life 我们需要它？">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/%E7%94%9F%E7%89%A9%E5%A4%9A%E6%A0%B7%E6%80%A7%E4%BF%A1%E6%81%AF%E5%AD%A6/2009/03/24/-cybertaxonomy" title="什么是Cybertaxonomy/etaxonomy">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>22 March 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

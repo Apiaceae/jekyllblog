@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Open Flash Chart in ASP.NET MVC</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>Open Flash Chart in ASP.NET MVC <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <p>If you’ve ever developed an application of any type, you know that the business function of that application is only half the story. Most business applications also have to take into mind that your business user is going to want reporting. As a developer I find reporting the most boring part of the development process, but it is becoming less and less painful for me as a developer to implement it into my applications. Within the last year Microsoft has released a charting addition to the .Net framework based on the Dundas charts package, but they only output static images. In most cases this is ok, but it doesn’t make for a very compelling experience. Open Flash Chart is one alternative to the .Net charting; it is interactive and dynamic, which can help you build those compelling interfaces that your clients look for. So the point of this walkthrough is to show you how to implement Open Flash Chart into your MVC application.</p>
+
+
+<p>  <p><a href="http://blog.aquabirdconsulting.com/wp-content/uploads/2009/12/image6.png"><img title="image" border="0" alt="image" src="http://blog.aquabirdconsulting.com/wp-content/uploads/2009/12/image_thumb2.png" width="618" height="405" /></a></p>  <h5>Step 1 – Download the Open Flash Chart package</h5>  <p>Obviously you’ll need Open Flash Chart, you can download it from <a href="http://teethgrinder.co.uk/open-flash-chart-2/downloads.php">the Official Open Flash Chart.</a> When you download it there is going to be a lot of files, but don’t worry about it I’ll tell you which ones you need.</p>  <h5>Step 2 – Import The Files You Need</h5>  <p>You are going to need two files at a minimum. There is a .Net library in the package but I’ll show you, you don’t need it. The first file is the open-flash-chart.swf. This file is the major component of the open flash chart package. I transferred this file directly into my content folder in my ASP.NET MVC project.</p>  <p><a href="http://blog.aquabirdconsulting.com/wp-content/uploads/2009/12/image7.png"><img title="image" border="0" alt="image" src="http://blog.aquabirdconsulting.com/wp-content/uploads/2009/12/image_thumb3.png" width="570" height="44" /></a></p>  <p><a href="http://blog.aquabirdconsulting.com/wp-content/uploads/2009/12/image8.png"><img title="image" border="0" alt="image" src="http://blog.aquabirdconsulting.com/wp-content/uploads/2009/12/image_thumb4.png" width="215" height="140" /></a></p>  <p>The next file you’ll need is the swfobject.js file, this will make placing your charts on the page much cleaner and simpler. Transfer this file into your scripts folder.</p>  <p><a href="http://blog.aquabirdconsulting.com/wp-content/uploads/2009/12/image9.png"><img title="image" border="0" alt="image" src="http://blog.aquabirdconsulting.com/wp-content/uploads/2009/12/image_thumb5.png" width="514" height="30" /></a></p>  <p><a href="http://blog.aquabirdconsulting.com/wp-content/uploads/2009/12/image10.png"><img title="image" border="0" alt="image" src="http://blog.aquabirdconsulting.com/wp-content/uploads/2009/12/image_thumb6.png" width="264" height="232" /></a></p>  <h5>Step 3 – Integrating Open Flash Chart into your View</h5>  <p>There are a couple things that I do to get Open Flash Chart into my view. I first modify my master page and add a new ContentPlaceHolder called “Scripts”. This allows me to inject custom scripts per view if necessary. My head tag in the master page looks like the following.</p>  <p><a href="http://blog.aquabirdconsulting.com/#viewSource">view source</a></p>  <p><a href="http://blog.aquabirdconsulting.com/#printSource">print</a><a href="http://blog.aquabirdconsulting.com/#about">?</a></p>  <p><code>1</code>    <br /><code>&lt;</code><code>head</code> <code>runat</code><code>=</code><code>&quot;server&quot;</code><code>&gt; </code></p>  <p><code>2</code>    <br /><code></code><code>&lt;</code><code>title</code><code>&gt;&lt;</code><code>asp:ContentPlaceHolder</code> <code>ID</code><code>=</code><code>&quot;TitleContent&quot;</code> <code>runat</code><code>=</code><code>&quot;server&quot;</code> <code>/&gt;&lt;/</code><code>title</code><code>&gt; </code></p>  <p><code>3</code>    <br /><code></code><code>&lt;</code><code>link</code> <code>href</code><code>=</code><code>&quot;/Content/Site.css&quot;</code> <code>rel</code><code>=</code><code>&quot;stylesheet&quot;</code> <code>type</code><code>=</code><code>&quot;text/css&quot;</code> <code>/&gt; </code></p>  <p><code>4</code>    <br /><code></code><code>&lt;</code><code>script</code> <code>src</code><code>=</code><code>&quot;/Scripts/swfobject.js&quot;</code> <code>type</code><code>=</code><code>&quot;text/javascript&quot;</code><code>&gt;&lt;/</code><code>script</code><code>&gt; </code></p>  <p><code>5</code>    <br /><code></code><code>&lt;</code><code>asp:ContentPlaceHolder</code> <code>ID</code><code>=</code><code>&quot;Scripts&quot;</code> <code>runat</code><code>=</code><code>&quot;server&quot;</code> <code>/&gt; </code></p>  <p><code>6</code>    <br /><code>&lt;/</code><code>head</code><code>&gt;</code></p>  <p>The next step is to inject the Chart into the page. The following code does that.</p>  <p><a href="http://blog.aquabirdconsulting.com/#viewSource">view source</a></p>  <p><a href="http://blog.aquabirdconsulting.com/#printSource">print</a><a href="http://blog.aquabirdconsulting.com/#about">?</a></p>  <p><code>1</code>    <br /><code>&lt;</code><code>asp:Content</code> <code>ContentPlaceHolderID</code><code>=</code><code>&quot;Scripts&quot;</code> <code>runat</code><code>=</code><code>&quot;server&quot;</code><code>&gt; </code></p>  <p><code>2</code>    <br /><code></code><code>&lt;</code><code>script</code> <code>type</code><code>=</code><code>&quot;text/javascript&quot;</code><code>&gt; </code></p>  <p><code>3</code>    <br /><code></code><code>swfobject.embedSWF( </code></p>  <p><code>4</code>    <br /><code></code><code>&quot;/Content/open-flash-chart.swf&quot;, &quot;my_chart&quot;, &quot;550&quot;, &quot;200&quot;, </code></p>  <p><code>5</code>    <br /><code></code><code>&quot;9.0.0&quot;, &quot;expressInstall.swf&quot;, </code></p>  <p><code>6</code>    <br /><code></code><code>{ &quot;data-file&quot;: &quot;Home/GetData&quot; } </code></p>  <p><code>7</code>    <br /><code></code><code>); </code></p>  <p><code>8</code>    <br /><code></code><code>&lt;/</code><code>script</code><code>&gt; </code></p>  <p><code>9</code>    <br /><code>&lt;/</code><code>asp:Content</code><code>&gt; </code></p>  <p>Notice what is done here. You first point to the open-flash-chart.swf in your content folder. Next you specify the div you would like to inject the chart into. Thirdly, you specify the size. Right after that is about the flash version and the install if your client is missing flash on their machine. Lastly, the most important thing, the location of your data. Notice that it points to a controller action. I’ll show you how to code that next.</p>  <h5>Step 4 – Data, Data, Data</h5>  <p>A chart wouldn’t be a chart without data. This is where we will leverage the power of the newest .Net frameworks with anonymous types. Open Flash Chart uses JSON objects to create you chart, but we don’t want to spend hours creating a library or adding references to assemblies we don’t need. So I went ahead and created an action relating to the one seen above. The code looks like this.</p>  <p><a href="http://blog.aquabirdconsulting.com/#viewSource">view source</a></p>  <p><a href="http://blog.aquabirdconsulting.com/#printSource">print</a><a href="http://blog.aquabirdconsulting.com/#about">?</a></p>  <p><code>01</code>    <br /><code>public</code> <code>JsonResult GetData() </code></p>  <p><code>02</code>    <br /><code>{ </code></p>  <p><code>03</code>    <br /><code></code><code>var data = </code><code>new</code></p>  <p><code>04</code>    <br /><code></code><code>{ </code></p>  <p><code>05</code>    <br /><code></code><code>title = </code><code>new</code> <code>{ text = </code><code>&quot;M</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/12/19/Linq+to+SQL+Like+Operator" title="Linq to SQL Like Operator">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2010/01/20/linux-ubuntu-tips-002" title="Linux Ubuntu8.04常用操作命令">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>20 December 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

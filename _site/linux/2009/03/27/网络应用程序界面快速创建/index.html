@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>网络应用程序界面快速创建</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>网络应用程序界面快速创建 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <p>
+Web applications are dynamic- many requiring unique content and interfaces for each user. There are a myriad of ways to take user content out of a database and present it in a browser. This article focuses on the different ways it can be done in the Microsoft world (specifically in ASP.NET), why we chose XSLT for our own product, and finally a look at our technical implementation. 
+</p>
+
+
+<h2>Planning for Dynamic Content</h2>
+
+
+<p>
+Whether you are in the process of building a new business web application or planning to build one, you most likely need to address how your web application will handle displaying different content for different users. 
+</p>
+
+
+<h3>Considerations</h3>
+
+
+<p>
+When considering the different options for displaying dynamic content you generally need to take into account the following aspects: 
+</p>
+
+
+<ul>
+    <li>Usability 
+    <div style="padding-right: 0px; padding-left: 3em; padding-bottom: 1em; padding-top: 5px">
+    Usability might be one of the most critical aspects in the success (or lack thereof) of your application. 
+    </div>
+    </li>
+    <li>Development Time 
+    <div style="padding-right: 0px; padding-left: 3em; padding-bottom: 1em; padding-top: 5px">
+    This includes the total amount of development time involved in satisfying your current application requirements. 
+    </div>
+    </li>
+    <li>Flexibility 
+    <div style="padding-right: 0px; padding-left: 3em; padding-bottom: 1em; padding-top: 5px">
+    Regardless of how comprehensive your current requirements are, applications tend to evolve over time. It&rsquo;s important to evaluate the development effort and skill sets required to accommodate changes. 
+    </div>
+    </li>
+    <li>Support, Maintenance &amp; Ongoing Enhancements 
+    <div style="padding-right: 0px; padding-left: 3em; padding-bottom: 1em; padding-top: 5px">
+    Commonly ignored by many when planning new development projects, it is generally responsible for a good chunk of the total cost of an application over the span of its life. This includes bug fixes, client customizations, minor application enhancements and of course, QA and testing. 
+    </div>
+    </li>
+</ul>
+
+
+<h3>The Options in ASP.NET</h3>
+
+
+<p>
+Generally web applications that use ASP.NET have two main options for displaying dynamic content: 
+</p>
+
+
+<ul>
+    <li>Server Controls 
+    <ul>
+        <li>With Binding &ndash; retrieving the relevant data and binding it to the appropriate ASP.Net server controls on a web form </li>
+        <li>In Code &ndash; populating the appropriate ASP.Net server controls in code </li>
+    </ul>
+    </li>
+    <li>HTML 
+    <ul>
+        <li>In Code &ndash; constructing the HTML to display in code based on the information retrieved from the database </li>
+        <li>With XSLT &ndash; retrieving the database information in XML format and then transforming it into HTML with XSLT </li>
+    </ul>
+    </li>
+</ul>
+
+
+<p>
+A third option is Silverlight, a new technology introduced as an option for web applications by Microsoft about a year ago. Silverlight provides a very rich GUI with the power of the .Net platform (a subset, actually) and tools that make web application development similar to the XAML interfaces found in the latest Windows application development. Silverlight is outside the scope of this particular article though. 
+</p>
+
+
+<h3>Comparing the Different Options</h3>
+
+
+<p>
+Before you decide on the best route to take to display dynamic content you need to evaluate the impact of each approach on your application. You might find the table below helpful when making this decision. 
+</p>
+
+
+<p>
+&nbsp;
+</p>
+
+
+<table border="0" class="comparison" style="width: 100%">
+    <tbody>
+        <tr>
+            <td style="width: 8em">Approach</td>
+            <td>Pros&nbsp; &amp; Cons</td>
+            <td>When to Use</td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>Server Controls</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align: right">With Binding</td>
+            <td>The quickest approach in terms of development time but also the least flexible.</td>
+            <td>Best suited for applications with low data complexity and that are not expected to change often.</td>
+        </tr>
+        <tr>
+            <td style="text-align: right">In Code</td>
+            <td>Hooking up the controls in code takes longer in terms of development but is much more flexible than binding. This approach also requires a higher level of support and maintenance.</td>
+            <td>Best suited for applications with high data complexity and that are not expected to change often.</td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>HTML</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align: right">In Code</td>
+            <td>Constructing HTML in code gives a good deal of flexibility over the markup that&rsquo;s created but is time-consuming and extraordinarily brittle. This approach requires extensive testing and support.</td>
+            <td>I wouldn&rsquo;t recommend this to be used as a general strategy for web applications but at times this might be used for particular sections depending on a unique set of requirements.</td>
+        </tr>
+        <tr>
+            <td style="text-align: right">Using XSLT</td>
+            <td>Offers high flexibility and the least amount of ongoing maintenance and testing. The development time might be longer depending on your team&rsquo;s skill set.</td>
+            <td>Best suited for applications with high data complexity and ones that are expected to change significantly and frequently. In addition, this allows for a lot of room for creativity as far as interface design goes.</td>
+        </tr>
+        <tr>
+            <td><strong>Silverlight</strong></td>
+            <td>Provides the richest GUI possibilities and the complete separation of interface and code. The time to develop, test and support are currently higher than other options.</td>
+            <td>Best suited for applications that require very rich user interfaces, and for development teams that primarily focus on Windows development.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<p>
+&nbsp;
+</p>
+
+
+<h3>Real-World Use Case: Scopings</h3>
+
+
+<p>
+When we started evaluating the requirements for <a href="http://www.scopings.com/">Scopings</a>, our homegrown recruiting platform, we needed a way to present complex content with a unique look and feel, a high level of usability, an infrastructure that can easily adapt to frequent and substantial changes, and built-in capabilities for globalization. 
+</p>
+
+
+<p>
+Very quickly we realized that although we can use ASP.Net server controls to build the first revision of Scopings in a relatively short period of time, this wouldn&rsquo;t adapt well to the frequent changes we expected to be an inevitable part of the product lifecycle. This option would substantially increase our total cost of ownership. 
+</p>
+
+
+<p>
+After much analysis and many discussions, it became clear to us that designing our own infrastructure for constructing HTML using XML and XSLT would satisfy all of our requirements. We sat down and started to design an infrastructure that has ultimately been used for more than 80% of the functionality on Scopings. 
+</p>
+
+
+<h3>Constructing the HTML</h3>
+
+
+<p>
+The idea behind the Scopings infrastructure was to allow us to make substantial changes to our user interface, while eliminating the need for any code changes and development staff involvement, and substantially decreasing the amount of QA required following any changes to the user interface. 
+</p>
+
+
+<p>
+To accommodate these requirements the Scopings infrastructure was built to be completely indifferent to the information retrieved from our database and to the way the information is ultimately displayed. 
+</p>
+
+
+<p>
+To achieve this we designed the infrastructure as follows: 
+</p>
+
+
+<p><ul>
+    <li>A separate stored procedure was built against each web content page to be displayed, and was designed to only return XML back to the calling code. </li>
+    <li>Upon loading a web page, the code behind would load the XML for the current user. The XSLT would then transform the XML to an HTML interface for the user. </li>
+    <li>The web page would be responsible for all functionality,</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/03/26/%E5%90%8E%E5%88%86%E7%B1%BB%E5%AD%A6%E5%AE%B6%E7%9A%84%E6%97%B6%E4%BB%A3" title="后分类学家的时代">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/%E7%94%9F%E7%89%A9%E5%9C%B0%E7%90%86%E5%AD%A6/2009/03/28/progress-conservation-biogeography" title="保护生物地理学研究进展">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>27 March 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>使用PRY代替RAILS CONSOLE</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>使用PRY代替RAILS CONSOLE <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <p>rails默认的调度工具是ruby-debug19，启动时还要加上”–debug”参数，或许你觉得用起来也还可以。但如果你用过pry，你会发现原来可以还这么方便，ruby-debug19是那么的简陋。以前还整过一堆插件来增强irb的功能，现在有了pry，默认配置就够用了，还有rails console也可以歇歇了。</p>
+
+<h2>安装</h2>
+
+<p><strong>在Gemfile中添加</strong></p>
+
+<pre><code class="ruby">gem 'pry', :group =&gt; :development
+</code></pre>
+
+<p><strong>然后执行</strong>
+<code>ruby
+bundle install
+</code>
+即可。</p>
+
+<p><strong>它可以这样用</strong></p>
+
+<p><strong>用pry代替irb方法，直接运行</strong>：
+<code>
+pry
+</code></p>
+
+<p><strong>用pry代替rails console方法，运行：</strong>
+<code>
+pry -r ./config/environment.rb
+</code></p>
+
+<p><strong>调试rails方法：</strong></p>
+
+<p>直接在要调试的地方添加
+<code>binding.pry</code></p>
+
+<p><code>rails server</code>当运行到这行代码时会自动调出一个pry终端，可以在这里进行交互。退出调试用''exit-all''。</p>
+
+<p>如：<code>/app/controllers/articles_controller.rb</code></p>
+
+<pre><code class="ruby">def index
+  @articles = Article.all
+  binding.pry
+end
+</code></pre>
+
+<h2>常用命令</h2>
+
+<p><strong>cd</strong>: 这可不是切换目录的，而是切换类。如<code>cd Article</code>会进入Article类中，<code>Article.all</code>可直接缩写为<code>all</code></p>
+
+<p><strong>nesting: </strong> cd切来切去如果迷了路，用它可以看当前在哪个类下面。我倒觉得如果名字改为”pwd”会更好。</p>
+
+<p><strong>ls</strong>: 查看一些信息，ls -h查看帮助，ls -m查看实例方法，ls-M查看类方法，ls -p查看private方法。</p>
+
+<p><strong>show-doc Array#in_groups_of</strong>：查看文档。</p>
+
+<p><strong>show-method -l Array#in_groups_of</strong>：查看方法的源代码，-l显示行号。</p>
+
+<p><strong>edit-method Array#in_groups_of</strong>：调出nano来编辑代码，如果是能调出vim就好啦。(后来发现其实很简单，见后面。)</p>
+
+<p><strong>help</strong>：显示帮助</p>
+
+<h2>调试Rails</h2>
+
+<p>pry默认没有调试中经常用到的下一步，上一步等命令，要安装
+<code>
+gem "pry-nav"
+</code>
+<strong>然后就可以使用step, next, continue来跳来跳去了。</strong></p>
+
+<h2>edit和edit-method能自动调用vim</h2>
+
+<p>默认调出nano编辑源代码是因为系统环境变量中没有\$EDITOR的缘故，有两种方法改为vim。
+1、添加环境变量\$EDITOR=”vim”
+2、新建\~/.pryrc配置文件，添加
+<code>Pry.config.editor = "vim"
+</code></p>
+
+<p>更多参考：</p>
+
+<p>http://railscasts.com/episodes/280-pry-with-rails?view=asciicast</p>
+
+<p>https://github.com/pry/pry</p>
+
+<p>http://tyok.org/prying_ruby/</p>
+
+<p>http://blog.tyraeltong.com/blog/2011/10/14/introducing-pry</p>
+
+<p>http://gnepud.tumblr.com</p>
+
+<p>http://rubyer.me/blog/1585/</p>
+
+<p><strong>下面是Pry—Hirb-awsom-print三个Gem包配合使用的.pryrc配置文件</strong></p>
+
+<pre><code class="ruby">Pry.config.editor = "mvim"
+
+####` Launch Pry with access to the entire Rails stack.
+####' If you have Pry in your Gemfile, you can pass: ./script/console --irb=pry instead.
+
+####` If you don't, you can load it through the lines below :)
+
+rails = File.join Dir.getwd, 'config', 'environment.rb'
+if File.exist?(rails) &amp;&amp; ENV['SKIP\_RAILS'].nil?
+
+require rails 
+
+if Rails.version[0..0] == "2"
+
+require 'console\_app'
+
+require 'console\_with\_helpers'
+
+elsif Rails.version[0..0] == "3"
+
+require 'rails/console/app'
+
+require 'rails/console/helpers'
+
+\# Show sql output
+
+ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?
+ActiveRecord::Base
+
+\# Add reload! command if rails version \&gt; 3.2
+
+if Rails.version[2..2].to\_i \&gt;= 2
+
+include Rails::ConsoleMethods
+
+end
+
+else
+
+warn "[WARN] cannot load Rails console commands (Not on Rails2 or
+Rails3?)"
+
+end
+
+end
+
+\# To edit the method given by editor mvim
+
+class Object
+
+def mvim(method\_name)
+
+file, line = method(method\_name).source\_location
+
+\`mvim '\#{file}' +\#{line}\`
+
+end
+
+end
+ 
+
+\# Break out of the Bundler jail
+
+\# from
+https://github.com/ConradIrwin/pry-debundle/blob/master/lib/pry-debundle.rb
+
+if defined? Bundler
+
+Gem.post\_reset\_hooks.reject! { |hook| hook.source\_location.first =\~
+%r{/bundler/} }
+
+Gem::Specification.reset
+
+load 'rubygems/custom\_require.rb'
+
+end
+
+ 
+
+if defined? Rails
+
+begin
+
+require 'hirb'
+
+rescue LoadError
+
+end
+
+ 
+
+if defined? Hirb
+
+\# Dirty hack to support in-session Hirb.disable/enable
+
+Hirb::View.instance\_eval do
+
+def enable\_output\_method
+
+@output\_method = true
+
+Pry.config.print = proc do |output, value|
+
+Hirb::View.view\_or\_page\_output(value) ||
+Pry::DEFAULT\_PRINT.call(output, value)
+
+end
+
+end
+
+ 
+
+def disable\_output\_method
+
+Pry.config.print = proc { |output, value|
+Pry::DEFAULT\_PRINT.call(output, value) }
+
+@output\_method = nil
+
+end
+
+end
+
+ 
+
+Hirb.enable
+
+end
+
+end
+
+ 
+
+begin
+
+require 'awesome\_print'
+
+rescue LoadError
+
+end
+</code></pre>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2013/09/03/nginx" title="Nginx内核参数相关的优化设定说明">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/%E9%9A%8F%E7%AC%94/2013/09/26/why-we-live-in-big-city" title="我？你？他？身处大城市的十大尴尬">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>23 September 2013</span></div>
+
+  
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    
+
+
+  
+     
+    	<li><a href="/tags.html#pry-ref">pry <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#debug-ref">debug <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

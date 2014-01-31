@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>EOL系统测试问题一</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>EOL系统测试问题一 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <p>
+<img src="/Blogs/image.axd?picture=2009%2f9%2f2009-09-20_0950.png" alt="" />
+</p>
+
+
+<p>
+真不知道到底是什么问题啊，只要运行 db:create:all就会出错。
+</p>
+
+
+<p>
+下面是可能存在的问题和解释：
+</p>
+
+
+<div id="solution_14910" class="solution">
+<div>
+貌似是数据库字符集的问题：
+</div>
+<div class="info">
+<a href="http://jones.javaeye.com/" target="_blank"><br />
+</a><a href="http://javaeye-admin.group.javaeye.com/group/new_topic" target="_blank" title="在站务论坛发帖举报该用户的作弊行为"></a>
+</div>
+</div>
+
+
+<div id="solution_15178" class="solution">
+<div>
+如果你没有启动MySQL服务，报的就是这个错。
+</div>
+<div class="info">
+<a href="http://foxgst.javaeye.com/" target="_blank"><br />
+</a><a href="http://javaeye-admin.group.javaeye.com/group/new_topic" target="_blank" title="在站务论坛发帖举报该用户的作弊行为"></a>
+</div>
+</div>
+
+
+<div id="solution_15316" class="solution">
+<div>
+不知你是否在新機器上。你的application是用rails 2.2.1開嗎？
+<br />
+<br />
+你確定裝了mysql adapter嗎？
+<br />
+<br />
+sudo gem install mysql
+<br />
+<br />
+另外，rails 2.2.1，一定會有要更新gem。
+<br />
+<br />
+你的gem是1.3.1嗎？
+<br />
+<br />
+試用gem -v或gem --version找出來
+<br />
+<br />
+若然不是，便要更新。
+</div>
+<div class="info">
+<a href="http://omnibus.javaeye.com/" target="_blank"><br />
+</a><a href="http://javaeye-admin.group.javaeye.com/group/new_topic" target="_blank" title="在站务论坛发帖举报该用户的作弊行为"></a>
+</div>
+</div>
+
+
+<div id="solution_15321" class="solution">
+<div>
+我也碰到过，gem install mysql 就好了
+</div>
+<div class="info">
+<a href="http://1985.javaeye.com/" target="_blank"><br />
+</a><a href="http://javaeye-admin.group.javaeye.com/group/new_topic" target="_blank" title="在站务论坛发帖举报该用户的作弊行为"></a>
+</div>
+</div>
+
+
+<div id="solution_15326" class="solution">
+<div>
+你能否確定database.yml內，username與password都是正確無誤嗎？
+<br />
+<br />
+錯誤都username及password，都會導致此error
+</div>
+<div class="info">
+<a href="http://omnibus.javaeye.com/" target="_blank"><br />
+</a><a href="http://javaeye-admin.group.javaeye.com/group/new_topic" target="_blank" title="在站务论坛发帖举报该用户的作弊行为"></a>
+</div>
+</div>
+
+
+<div>
+你把其中 的localhost改成127.0.0.1试试。
+<br />
+另外，说说你的环境和平台之类的。
+</div>
+
+
+<p>
+&nbsp;
+</p>
+
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/09/19/17%E6%AC%BEMySQL%E7%AE%A1%E7%90%86%E4%B8%8E%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%BB%BC%E8%BF%B0" title="17款MySQL管理与开发工具综述">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2009/09/20/%E8%AD%A6%E9%98%B2%E8%BF%91%E6%9C%9FSkype%E4%B8%AD%E5%A5%96%E7%9A%84%E9%AA%97%E5%B1%80" title="警防近期Skype中奖的骗局">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>20 September 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

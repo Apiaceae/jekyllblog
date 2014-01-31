@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ubuntu解压命令全览</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>ubuntu解压命令全览 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <p><strong>.tar</strong></p>
+
+<p>解包：tar xvf FileName.tar</p>
+
+<p>打包：tar cvf FileName.tar DirName</p>
+
+<p>(注：tar是打包，不是压缩！）</p>
+
+<p><strong>.gz</strong></p>
+
+<p>解压1：gunzip FileName.gz
+解压2：gzip -d FileName.gz<br /> 压缩：gzip FileName<br /> <strong><span style="font-size: x-small;"><span style="color: #0000ff;">.tar.gz 和 .tgz</span></span></strong><br /> 解压：tar zxvf FileName.tar.gz<br /> 压缩：tar zcvf FileName.tar.gz DirName<br /> ---------------------------------------------<br /> <strong><span style="font-size: x-small;"><span style="color: #0000ff;">.bz2</span></span></strong><br /> 解压1：bzip2 -d FileName.bz2<br /> 解压2：bunzip2 FileName.bz2<br /> 压缩： bzip2 -z FileName<br /> <strong><span style="font-size: x-small;"><span style="color: #0000ff;">.tar.bz2</span></span></strong><br /> 解压：tar jxvf FileName.tar.bz2<br /> 压缩：tar jcvf FileName.tar.bz2 DirName<br /> ---------------------------------------------<br /> <strong><span style="font-size: x-small;"><span style="color: #0000ff;">.bz</span></span></strong><br /> 解压1：bzip2 -d FileName.bz<br /> 解压2：bunzip2 FileName.bz<br /> 压缩：<span style="color: #ffa500;">未知</span><br /> <strong><span style="font-size: x-small;"><span style="color: #0000ff;">.tar.bz</span></span></strong><br /> 解压：tar jxvf FileName.tar.bz<br /> 压缩：<span style="color: #ffa500;">未知</span><br /> ---------------------------------------------<br /> <strong><span style="font-size: x-small;"><span style="color: #0000ff;">.Z</span></span></strong><br /> 解压：uncompress FileName.Z<br /> 压缩：compress FileName<br /> <strong><span style="font-size: x-small;"><span style="color: #0000ff;">.tar.Z</span></span></strong><br /> 解压：tar Zxvf FileName.tar.Z<br /> 压缩：tar Zcvf FileName.tar.Z DirName<br /> ---------------------------------------------<br /> <strong><span style="font-size: x-small;"><span style="color: #0000ff;">.zip</span></span></strong><br /> 解压：unzip FileName.zip<br /> 压缩：zip FileName.zip DirName<br /> ---------------------------------------------<br /> <strong><span style="font-size: x-small;"><span style="color: #0000ff;">.rar</span></span></strong><br /> 解压：rar x FileName.rar<br /> 压缩：rar a FileName.rar DirName<br /> <span style="color: #008000;"><br /> rar请到：<a style="color: #003793;" href="http://www.rarsoft.com/download.htm" target="_blank"><span style="color: #003793;">http://www.rarsoft.com/download.htm</span></a> 下载！<br /> 解压后请将rar_static拷贝到/usr/bin目录（其他由$PATH环境变量指定的目录也可以）：<br /> [root@www2 tmp]# cp rar_static /usr/bin/rar</span><br /> ---------------------------------------------<br /> <strong><span style="font-size: x-small;"><span style="color: #0000ff;">.lha</span></span></strong><br /> 解压：lha -e FileName.lha<br /> 压缩：lha -a FileName.lha FileName<br /> <span style="color: #008000;"><br /> lha请到：<a style="color: #003793;" href="http://www.infor.kanazawa-it.ac.jp/%7Eishii/lhaunix/" target="_blank"><span style="color: #003793;">http://www.infor.kanazawa-it.ac.jp/~ishii/lhaunix/</span></a>下载！<br /> &gt;解压后请将lha拷贝到/usr/bin目录（其他由$PATH环境变量指定的目录也可以）：<br /> [root@www2 tmp]# cp lha /usr/bin/</span><br /> ---------------------------------------------<br /> <strong><span style="font-size: x-small;"><span style="color: #0000ff;">.rpm</span></span></strong><br /> 解包：rpm2cpio FileName.rpm | cpio -div<br /> ---------------------------------------------<br /> <strong><span style="font-size: x-small;"><span style="color: #0000ff;">.deb</span></span></strong><br /> 解包：ar p FileName.deb data.tar.gz | tar zxf -<br /> ---------------------------------------------<br /> <strong><span style="font-size: x-small;"><span style="color: #0000ff;">.tar .tgz .tar.gz .tar.Z .tar.bz .tar.bz2 .zip .cpio .rpm .deb .slp .arj .rar .ace .lha .lzh .lzx .lzs .arc .sda .sfx .lnx .zoo .cab .kar .cpt .pit .sit .sea</span></span></strong><br /> 解压：sEx x FileName.<em><br /> 压缩：sEx a FileName.</em> FileName</p></p>
+
+<p>文章转自：http://blog.csdn.net/zad522/article/details/2770446</p>
+
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/2012/07/17/ubuntu-tips23" title="Ubuntu10.04长期支持版本(LTS)发布">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2012/07/18/ubuntu-drupal7-apache-solr-steps" title="Ubuntu为drupal7配置Apache Solr详细步骤">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>17 July 2012</span></div>
+
+  
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    
+
+
+  
+     
+    	<li><a href="/tags.html#ubuntu-ref">ubuntu <span>4</span></a></li>
+     
+    	<li><a href="/tags.html#tar-ref">tar <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

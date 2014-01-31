@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>apt-get commands pausing at 'Waiting for headers'</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <p style="margin: 0px 0px 1em; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; clear: both; word-wrap: break-word; font-family: Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif; line-height: 18px;">Try commenting out your multiverse and universe repos in your&nbsp;<em style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: transparent;">/etc/apt/sources.list</em></p>
+
+
+<p style="margin: 0px 0px 1em; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; clear: both; word-wrap: break-word; font-family: Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif; line-height: 18px;">Then do a:&nbsp;<strong style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: transparent;">apt-get clean all</strong></p>
+
+
+<p style="margin: 0px 0px 1em; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; clear: both; word-wrap: break-word; font-family: Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif; line-height: 18px;">then finally an:&nbsp;<strong style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: transparent;">apt-get update</strong></p>
+
+
+<p style="margin: 0px 0px 1em; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; clear: both; word-wrap: break-word; font-family: Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif; line-height: 18px;">See if that clears it up some.</p>
+
+
+<p style="margin: 0px 0px 1em; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; clear: both; word-wrap: break-word; font-family: Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif; line-height: 18px;">&nbsp;</p>
+
+
+<p style="margin: 0px 0px 1em; padding: 0px; border: 0px; vertical-align: baseline; clear: both; word-wrap: break-word;">Make sure your time &amp; date is set correctly,</p>
+
+
+<p style="margin: 0px 0px 1em; padding: 0px; border: 0px; vertical-align: baseline; clear: both; word-wrap: break-word;">I had the same problem and fixed it with a simple&nbsp;<code style="margin: 0px; padding: 1px 5px; border: 0px; vertical-align: baseline; background-color: #eeeeee; font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;">ntpdate</code></p>
+
+
+<p style="margin: 0px 0px 1em; padding: 0px; border: 0px; vertical-align: baseline; clear: both; word-wrap: break-word;">Also, find out what it's doing by running&nbsp;<code style="margin: 0px; padding: 1px 5px; border: 0px; vertical-align: baseline; background-color: #eeeeee; font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;">sudo strace apt-get update</code></p>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>合并多行数据到一行:合并异名记录到接受名的Synsum字段</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>合并多行数据到一行:合并异名记录到接受名的Synsum字段 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <div class="csharpcode">   <pre class="alt"><p>原来的数据表的格式及需求如下：</p><p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/7e3aa2074e4b/76C9F2B8/20090525_00078.jpg"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="2009-05-25_00078" border="0" alt="2009-05-25_00078" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/7e3aa2074e4b/02EB6CE0/20090525_00078_thumb.jpg" width="644" height="357" /></a> </p><p>&#160;</p></pre>
+
+  <div class="csharpcode">
+    <pre class="alt"><span class="rem">-- SQL2005 新的解决方法 -- 示例数据</span></pre>
+
+    <pre><span class="kwrd">DECLARE</span> @t <span class="kwrd">TABLE</span></pre>
+
+    <pre class="alt">    (</pre>
+
+    <pre>      id <span class="kwrd">INT</span>,</pre>
+
+    <pre class="alt">      <span class="kwrd">value</span> <span class="kwrd">VARCHAR</span>(300)</pre>
+
+    <pre>    )</pre>
+
+    <pre class="alt">INSERT  @t</pre>
+
+    <pre>        <span class="kwrd">SELECT</span>  synof,</pre>
+
+    <pre class="alt">                AbbreviateName</pre>
+
+    <pre>        <span class="kwrd">FROM</span>    dbo.Species</pre>
+
+    <pre class="alt">        <span class="kwrd">WHERE</span>   synof &gt; 0    </pre>
+
+    <pre><span class="rem">-- 查询处理</span></pre>
+
+    <pre class="alt"><span class="kwrd">SELECT</span>  *</pre>
+
+    <pre><span class="kwrd">FROM</span>    ( <span class="kwrd">SELECT</span> <span class="kwrd">DISTINCT</span></pre>
+
+    <pre class="alt">                    id</pre>
+
+    <pre>          <span class="kwrd">FROM</span>      @t</pre>
+
+    <pre class="alt">        ) A</pre>
+
+    <pre>        <span class="kwrd">OUTER</span> APPLY ( <span class="kwrd">SELECT</span>    [<span class="kwrd">values</span>] = STUFF(REPLACE(REPLACE(( <span class="kwrd">SELECT</span>   <span class="kwrd">value</span></pre>
+
+    <pre class="alt">                                                                   <span class="kwrd">FROM</span>     @t N</pre>
+
+    <pre>                                                                   <span class="kwrd">WHERE</span>    id = A.id</pre>
+
+    <pre class="alt">                                                                 <span class="kwrd">FOR</span></pre>
+
+    <pre>                                                                   XML AUTO</pre>
+
+    <pre class="alt">                                                                 ), <span class="str">'&lt;N value=&quot;'</span>, <span class="str">','</span>),</pre>
+
+    <pre>                                                         <span class="str">'&quot;/&gt;'</span>, <span class="str">''</span>), 1, 1, <span class="str">''</span>)</pre>
+
+    <pre class="alt">                    ) N                    </pre>
+
+    <pre>                    </pre>
+  </div>
+  <style type="text/css">
+.csharpcode, .csharpcode pre
+{
+    font-size: small;
+    color: black;
+    font-family: consolas, "Courier New", courier, monospace;
+    background-color: #ffffff;
+    /*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+    background-color: #f4f4f4;
+    width: 100%;
+    margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+  <pre>运行结果</pre>
+
+  <pre><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/7e3aa2074e4b/7A1B6493/20090525_00079.jpg"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="2009-05-25_00079" border="0" alt="2009-05-25_00079" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/7e3aa2074e4b/570AF323/20090525_00079_thumb.jpg" width="628" height="484" /></a> </pre>
+</div>
+
+
+
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/05/25/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96GridView%E9%9A%90%E8%97%8F%E5%88%97%E7%9A%84%E5%80%BC" title="如何获取GridView隐藏列的值">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2009/05/26/Repeater%E6%8E%A7%E4%BB%B6%E5%B5%8C%E5%A5%97%E7%BB%91%E5%AE%9A%E7%A7%91%E5%B1%9E%E6%95%B0%E6%8D%AE" title="Repeater控件嵌套绑定科属数据">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>25 May 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

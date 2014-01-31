@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>DataList控件删除选中的记录</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>DataList控件删除选中的记录 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=20091018_012535.png"><img title="2009-10-18_012535" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="276" alt="2009-10-18_012535" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=20091018_012535_thumb.png" width="644" border="0" /></a></p>
+
+
+<p>  <p>Default.aspx页面代码</p>  <pre class="code"><span style="background: #ffee62">&lt;%</span><span style="color: blue">@ </span><span style="color: #a31515">Page </span><span style="color: red">Language</span><span style="color: blue">=&quot;C#&quot; </span><span style="color: red">AutoEventWireup</span><span style="color: blue">=&quot;true&quot; </span><span style="color: red">CodeFile</span><span style="color: blue">=&quot;Default.aspx.cs&quot; </span><span style="color: red">Inherits</span><span style="color: blue">=&quot;_Default&quot; </span><span style="background: #ffee62">%&gt;</p>
+
+<p></span><span style="color: blue">&lt;!</span><span style="color: #a31515">DOCTYPE </span><span style="color: red">html PUBLIC </span><span style="color: blue">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; </span></pre></p>
+
+<pre class="code"><span style="color: blue">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;</span><span style="color: #a31515">html </span><span style="color: red">xmlns</span><span style="color: blue">=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+&lt;</span><span style="color: #a31515">head </span><span style="color: red">runat</span><span style="color: blue">=&quot;server&quot;&gt;
+    &lt;</span><span style="color: #a31515">title</span><span style="color: blue">&gt;&lt;/</span><span style="color: #a31515">title</span><span style="color: blue">&gt;
+&lt;/</span><span style="color: #a31515">head</span><span style="color: blue">&gt;
+&lt;</span><span style="color: #a31515">body</span><span style="color: blue">&gt;
+    &lt;</span><span style="color: #a31515">form </span><span style="color: red">id</span><span style="color: blue">=&quot;form1&quot; </span><span style="color: red">runat</span><span style="color: blue">=&quot;server&quot;&gt;
+    &lt;</span><span style="color: #a31515">div</span><span style="color: blue">&gt;
+    &lt;/</span><span style="color: #a31515">div</span><span style="color: blue">&gt;
+    &lt;</span><span style="color: #a31515">asp</span><span style="color: blue">:</span><span style="color: #a31515">DataList </span><span style="color: red">ID</span><span style="color: blue">=&quot;DataList1&quot; </span><span style="color: red">runat</span><span style="color: blue">=&quot;server&quot; </span><span style="color: red">DataKeyField</span><span style="color: blue">=&quot;CustomerID&quot; </span><span style="color: red">RepeatColumns</span><span style="color: blue">=&quot;3&quot;
+        </span><span style="color: red">RepeatDirection</span><span style="color: blue">=&quot;Horizontal&quot; </span><span style="color: red">DataSourceID</span><span style="color: blue">=&quot;SqlDataSource1&quot; </span><span style="color: red">CellPadding</span><span style="color: blue">=&quot;4&quot; </span></pre>
+
+
+
+
+<p><pre class="code"><span style="color: blue"></span><span style="color: red">ForeColor</span><span style="color: blue">=&quot;#333333&quot; </span><span style="color: red">OnEditCommand</span><span style="color: blue">=&quot;DataList1_EditCommand&quot; </span><span style="color: red">OnCancelCommand</span><span style="color: blue">=&quot;DataList1_CancelCommand&quot;
+        </span><span style="color: red">OnDeleteCommand</span><span style="color: blue">=&quot;DataList1_DeleteCommand&quot;&gt;
+        &lt;</span><span style="color: #a31515">FooterStyle </span><span style="color: red">BackColor</span><span style="color: blue">=&quot;#507CD1&quot; </span><span style="color: red">Font-Bold</span><span style="color: blue">=&quot;True&quot; </span><span style="color: red">ForeColor</span><span style="color: blue">=&quot;White&quot; /&gt;
+        &lt;</span><span style="color: #a31515">AlternatingItemStyle </span><span style="color: red">BackColor</span><span style="color: blue">=&quot;White&quot; /&gt;
+        &lt;</span><span style="color: #a31515">ItemStyle </span><span style="color: red">BackColor</span><span style="color: blue">=&quot;#EFF3FB&quot; /&gt;
+        &lt;</span><span style="color: #a31515">SelectedItemStyle </span><span style="color: red">BackColor</span><span style="color: blue">=&quot;#D1DDF1&quot; </span><span style="color: red">Font-Bold</span><span style="color: blue">=&quot;True&quot; </span><span style="color: red">ForeColor</span><span style="color: blue">=&quot;#333333&quot; /&gt;
+        &lt;</span><span style="color: #a31515">HeaderStyle </span><span style="color: red">BackColor</span><span style="color: blue">=&quot;#FF3399&quot; </span><span style="color: red">Font-Bold</span><span style="color: blue">=&quot;True&quot; </span><span style="color: red">ForeColor</span><span style="color: blue">=&quot;#FF99CC&quot; </span><span style="color: red">Font-Italic</span><span style="color: blue">=&quot;False&quot;
+            </span><span style="color: red">Font-Overline</span><span style="color: blue">=&quot;False&quot; </span><span style="color: red">Font-Strikeout</span><span style="color: blue">=&quot;False&quot; </span><span style="color: red">Font-Underline</span><span style="color: blue">=&quot;False&quot; /&gt;
+        &lt;</span><span style="color: #a31515">ItemTemplate</span><span style="color: blue">&gt;
+            </span>CustomerID:
+            <span style="color: blue">&lt;</span><span style="color: #a31515">asp</span><span style="color: blue">:</span><span style="color: #a31515">Label </span><span style="color: red">ID</span><span style="color: blue">=&quot;CustomerIDLabel&quot; </span><span style="color: red">runat</span><span style="color: blue">=&quot;server&quot; </span><span style="color: red">Text</span><span style="color: blue">='</span><span style="background: #ffee62">&lt;%</span># Eval(&quot;CustomerID&quot;) <span style="background: #ffee62">%&gt;</span><span style="color: blue">' /&gt;
+            &lt;</span><span style="color: #a31515">br </span><span style="color: blue">/&gt;
+            </span>CompanyName:
+            <span style="color: blue">&lt;</span><span style="color: #a31515">asp</span><span style="color: blue">:</span><span style="color: #a31515">Label </span><span style="color: red">ID</span><span style="color: blue">=&quot;CompanyNameLabel&quot; </span><span style="color: red">runat</span><span style="color: blue">=&quot;server&quot; </span><span style="color: red">Text</span><span style="color: blue">='</span><span style="background: #ffee62">&lt;%</span># Eval(&quot;CompanyName&quot;) <span style="background: #ffee62">%&gt;</span><span style="color: blue">' /&gt;
+            &lt;</span><span style="color: #a31515">br </span><span style="color: blue">/&gt;
+            </span>ContactName:
+            <span style="color: blue">&lt;</span><span style="color: #a31515">asp</span><span style="color: blue">:</span><span style="color: #a31515">Label </span><span style="color: red">ID</span><span style="color: blue">=&quot;ContactNameLabel&quot; </span><span style="color: red">runat</span><span style="color: blue">=&quot;server&quot; </span><span style="color: red">Text</span><span style="color: blue">='</span><span style="background: #ffee62">&lt;%</span># Eval(&quot;ContactName&quot;) <span style="background: #ffee62">%&gt;</span><span style="color: blue">' /&gt;
+            &lt;</span><span style="color: #a31515">br </span><span style="color: blue">/&gt;
+            </span>ContactTitle:
+            <span style="color: blue">&lt;</span><span style="color: #a31515">asp</span><span style="color: blue">:</span><span style="color: #a31515">Label </span><span style="color: red">ID</span><span style="color: blue">=&quot;ContactTitleLabel&quot; </span><span style="color: red">runat&lt;</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/10/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Open+Flash+Chart%E5%88%B6%E4%BD%9C%E7%B2%BE%E7%BE%8E%E7%9A%84%E7%BD%91%E7%BB%9C%E5%9B%BE%E8%A1%A8" title="如何使用Open Flash Chart制作精美的网络图表">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2009/10/18/AJAX%E5%A4%A7%E9%87%8FXML%E6%95%B0%E6%8D%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BDTreeView" title="AJAX大量XML数据动态加载TreeView">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>18 October 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

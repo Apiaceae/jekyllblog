@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>XML学习笔记(六)：如何使用XPath-基本概念</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>XML学习笔记(六)：如何使用XPath-基本概念 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <ul>   <li>Location path:路径，相当于我们使用文件系统所说的某个文件的路径。XML文档中有许多的元素和属性。按照XPath语法规则所指明的节点、元素、属性在XML文档中的位置就是Location path。 </li>    <li>Axis:类似于我们文件路径所使用的磁盘符号，例如：C:\,D:\。Axis以当前节点的位置为起始点，把XML文件的其它部分进行定位，有些元素可能出于当前节点的前面或后面，这就构成了对XML文档的分隔。经常用到的Axis如下表所示。 </li> </ul>
+
+
+<p>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/XMLXPath/0CA196DD/20090510_000201.jpg"><img title="2009-05-10_000201" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="344" alt="2009-05-10_000201" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/XMLXPath/509F97EB/20090510_000201_thumb.jpg" width="644" border="0" /></a> </p>  <ul>   <li>Node tests：根据某些条件对元素或节点的类型进行检查，返回所选择的元素或节点 </li>    <li>Predicates：它是一个布尔表达式，用来返回根据限定的Axis、节点或元素以及指定条件是否是真假。 </li> </ul>  <p>例子：</p>  <p>following::employee[@employeeid='2']</p>  <p><font color="#ff0000">Axis::Node test[Predicates]</font></p>  <p><font color="#ff0000">含义：当前节点下的employee节点employeeid属性为2</font></p>  <p>//employee[./firstname/text()='some_text']</p>  <p><font color="#ff0000">含义：根节点(//)下的当前节点employee节点的firstname节点的文本字符串是否符合'some_text'条件</font>     <br />//employee[@employeeid='1']</p>  <p><font color="#ff0000">含义：根节点(//)下的employee节点的employeeid属性值为1</font></p>  <p>&#160;</p>  <h2>XPath的内置函数</h2>  <h3>处理节点Nodes的函数</h3>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/XMLXPath/28FBAC72/20090510_000609.jpg"><img title="2009-05-10_000609" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="301" alt="2009-05-10_000609" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/XMLXPath/3EE51EC2/20090510_000609_thumb.jpg" width="644" border="0" /></a> </p>  <h3>返回布尔值的函数</h3>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/XMLXPath/30A93683/20090510_000701.jpg"><img title="2009-05-10_000701" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="138" alt="2009-05-10_000701" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/XMLXPath/07A12838/20090510_000701_thumb.jpg" width="644" border="0" /></a> </p>  <h3>处理字符串Strings的函数</h3>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/XMLXPath/34B61506/20090510_000742.jpg"><img title="2009-05-10_000742" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="241" alt="2009-05-10_000742" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/XMLXPath/149D98FA/20090510_000742_thumb.jpg" width="644" border="0" /></a> </p>  <h3>处理数字Numbers的函数</h3>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/XMLXPath/3CCFD20C/20090510_000825.jpg"><img title="2009-05-10_000825" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="232" alt="2009-05-10_000825" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/XMLXPath/08320682/20090510_000825_thumb.jpg" width="644" border="0" /></a> </p>  <p>相关资源：</p>  <p><a title="http://www.cnblogs.com/xiaofanabc/archive/2005/04/20/141132.html" href="http://www.cnblogs.com/xiaofanabc/archive/2005/04/20/141132.html">http://www.cnblogs.com/xiaofanabc/archive/2005/04/20/141132.html</a></p>  <p><a title="http://www.cnblogs.com/xiaofanabc/archive/2005/04/20/141327.html" href="http://www.cnblogs.com/xiaofanabc/archive/2005/04/20/141327.html">http://www.cnblogs.com/xiaofanabc/archive/2005/04/20/141327.html</a></p></p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/05/09/XML%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%28%E4%BA%94%29%3A%E8%AF%BB%E5%86%99%E9%9D%9E%E6%96%87%E6%9C%AC%E6%A0%BC%E5%BC%8F%E7%9A%84XML%E6%96%87%E4%BB%B6" title="XML学习笔记(五):读写非文本格式的XML文件">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2009/05/10/%E7%94%9F%E7%89%A9%E5%9C%B0%E7%90%86%E5%AD%A6%E6%96%B0%E4%B9%A6%E7%B3%BB%E5%88%97" title="生物地理学新书系列">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>10 May 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

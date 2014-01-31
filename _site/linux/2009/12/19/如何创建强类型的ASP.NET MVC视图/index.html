@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>如何创建强类型的ASP.NET MVC视图</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>如何创建强类型的ASP.NET MVC视图 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/392FD326/20091219_201740.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="2009-12-19_201740" border="0" alt="2009-12-19_201740" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/68ED7BA5/20091219_201740_thumb.png" width="269" height="288" /></a> </p>
+
+
+<p>  <p>1.在你的MVC应用程序根目录添加新文件夹，取名为<strong>CodeSmith</strong></p>  <p>2.添加CodeSmith模板文件<strong>StrongTypedViews.cst.</strong></p>  <p>3.右键点击CodeSmith文件夹，选择添加一个新的CodeSmith Project，取名为<strong>CodeSmith.csp</strong>.</p>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/41B5C321/20091219_202243.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="2009-12-19_202243" border="0" alt="2009-12-19_202243" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/49CF8027/20091219_202243_thumb.png" width="682" height="371" /></a> </p>  <p>4.右键点击刚生成的<strong>CodeSmith.csp</strong>文件在弹出的右键菜单选择Manager Output</p>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/06899969/20091219_202635.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="2009-12-19_202635" border="0" alt="2009-12-19_202635" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/339E8637/20091219_202635_thumb.png" width="318" height="340" /></a> </p>  <p>5.在弹出的对话框菜单做如下的设置</p>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/558C796C/20091219_202821.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="2009-12-19_202821" border="0" alt="2009-12-19_202821" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/14EA2CFD/20091219_202821_thumb.png" width="551" height="339" /></a> </p>  <p></p>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/087E9A85/20091219_203037.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="2009-12-19_203037" border="0" alt="2009-12-19_203037" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/0644A27A/20091219_203037_thumb.png" width="547" height="374" /></a> </p>  <p>6.右键<strong>CodeSmith.csp</strong>选择Generate Output生成<strong>CotrollerBase.cs</strong></p>  <p><a href="http://blog.rthand.com/image.axd?picture=WindowsLiveWriter/StrongtypingASP.NETMVC/595713E9/stv4.png"><img title="stv4" border="0" alt="stv4" src="http://blog.rthand.com/image.axd?picture=WindowsLiveWriter/StrongtypingASP.NETMVC/595713E9/stv4_thumb.png" width="234" height="346" /></a></p>  <p>ControllerBase.cs文件</p>  <pre class="code"><span style="color: blue">namespace </span><span style="color: #010001">CNPC</span>.<span style="color: #010001">Controllers
+</span>{
+    <span style="color: blue">public partial class </span><span style="color: #2b91af">ControllerBase</span>: <span style="color: #2b91af">Controller
+    </span>{
+        <span style="color: blue">public class </span><span style="color: #2b91af">ViewFolderBase
+        </span>{
+            <span style="color: blue">protected readonly </span><span style="color: #2b91af">ControllerBase </span><span style="color: #010001">controllerBase</span>;</p>
+
+<pre><code>        &lt;span style="color: blue"&gt;public &lt;/span&gt;&lt;span style="color: #010001"&gt;ViewFolderBase&lt;/span&gt;(&lt;span style="color: #2b91af"&gt;ControllerBase &lt;/span&gt;&lt;span style="color: #010001"&gt;controllerBase&lt;/span&gt;)
+        { &lt;span style="color: blue"&gt;this&lt;/span&gt;.&lt;span style="color: #010001"&gt;controllerBase &lt;/span&gt;= &lt;span style="color: #010001"&gt;controllerBase&lt;/span&gt;; }
+    }
+
+    &lt;span style="color: blue"&gt;public new &lt;/span&gt;&lt;span style="color: #2b91af"&gt;ViewResult &lt;/span&gt;&lt;span style="color: #010001"&gt;View&lt;/span&gt;(&lt;span style="color: blue"&gt;string &lt;/span&gt;&lt;span style="color: #010001"&gt;path&lt;/span&gt;, &lt;span style="color: blue"&gt;object &lt;/span&gt;&lt;span style="color: #010001"&gt;model&lt;/span&gt;)
+    {
+        &lt;span style="color: blue"&gt;return base&lt;/span&gt;.&lt;span style="color: #010001"&gt;View&lt;/span&gt;(&lt;span style="color: #010001"&gt;path&lt;/span&gt;, &lt;span style="color: #010001"&gt;model&lt;/span&gt;);
+    }
+
+    &lt;span style="color: blue"&gt;public new &lt;/span&gt;&lt;span style="color: #2b91af"&gt;PartialViewResult &lt;/span&gt;&lt;span style="color: #010001"&gt;PartialView&lt;/span&gt;(&lt;span style="color: blue"&gt;string &lt;/span&gt;&lt;span style="color: #010001"&gt;path&lt;/span&gt;, &lt;span style="color: blue"&gt;object &lt;/span&gt;&lt;span style="color: #010001"&gt;model&lt;/span&gt;)
+    {
+        &lt;span style="color: blue"&gt;return base&lt;/span&gt;.&lt;span style="color: #010001"&gt;PartialView&lt;/span&gt;(&lt;span style="color: #010001"&gt;path&lt;/span&gt;, &lt;span style="color: #010001"&gt;model&lt;/span&gt;);
+    }
+
+    &lt;span style="color: blue"&gt;protected &lt;/span&gt;&lt;span style="color: #2b91af"&gt;ViewsFolder &lt;/span&gt;&lt;span style="color: #010001"&gt;Views
+    &lt;/span&gt;{ &lt;span style="color: blue"&gt;get &lt;/span&gt;{ &lt;span style="color: blue"&gt;return new &lt;/span&gt;&lt;span style="color: #2b91af"&gt;ViewsFolder&lt;/span&gt;(&lt;span style="color: blue"&gt;this&lt;/span&gt;); } }
+
+
+&lt;span style="color: blue"&gt;public class &lt;/span&gt;&lt;span style="color: #2b91af"&gt;ViewsFolder&lt;/span&gt;: &lt;span style="color: #2b91af"&gt;ViewFolderBase
+&lt;/span&gt;{
+    &lt;span style="color: blue"&gt;public &lt;/span&gt;&lt;span style="color: #010001"&gt;ViewsFolder&lt;/span&gt;(&lt;span style="color: #2b91af"&gt;ControllerBase &lt;/span&gt;&lt;span style="color: #010001"&gt;controllerBase&lt;/span&gt;): &lt;span style="color: blue"&gt;base&lt;/span&gt;(&lt;span style="color: #010001"&gt;controllerBase&lt;/span&gt;) { }
+    &lt;/pre&gt;
+</code></pre>
+
+<p><a href="http://11011.net/software/vspaste"></a></p>
+
+<p>7.最好需要修改你的控制器类从ControllerBase继承，如下</p>
+
+
+
+
+<p>&#160;</p>
+
+
+
+
+<p><pre class="code"><span style="color: blue">using </span><span style="color: #010001">System</span>;
+<span style="color: blue">using </span><span style="color: #010001">System</span>.<span style="color: #010001">Collections</span>.<span style="color: #010001">Generic</span>;
+<span style="color: blue">using </span><span style="color: #010001">System</span>.<span style="color: #010001">Linq</span>;
+<span style="color: blue">using </span><span style="color: #010001">System</span>.<span style="color: #010001">Web</span>;
+<span style="color: blue">using </span><span style="color: #010001">System</span>.<span style="color: #010001">Web</span>.<span style="color: #010001">Mvc</span>;
+<span style="color: blue">using </span><span style="color: #010001">System</span>.<span style="color: #010001">Web</span>.<span style="color: #010001">Mvc</span>.<span style="color: #010001">Ajax</span>;</p>
+
+<p><span style="color: blue">namespace </span><span style="color: #010001">CNPC</span>.<span style="color: #010001">Controllers
+</span>{
+    <span style="color: blue">public class </span><span style="color: #2b91af">SearchController </span>: <span style="color: #2b91af">ControllerBase//<font color="#ff0000">继承类</font>
+    </span>{
+        <span style="color: #010001">Models</span>.<span style="color: #2b91af">cnpcDataContext </span><span style="color: #010001">cnpc </span>= <span style="color: blue">new </span><span style="color: #010001">CNPC</span>.<span style="color: #010001">Models</span>.<span style="color: #2b91af">cnpcDataContext</span>();</p>
+
+<pre><code>    &lt;span style="color: green"&gt;//Example Url: /Search
+    //
+    &lt;/span&gt;&lt;span style="color: blue"&gt;public &lt;/span&gt;&lt;span style="color: #2b91af"&gt;ActionResult &lt;/span&gt;&lt;span style="color: #010001"&gt;Index&lt;/span&gt;()
+    {
+        &lt;span style="color: blue"&gt;return &lt;/span&gt;&lt;span style="color: #010001"&gt;Views&lt;/span&gt;.&lt;span style="color: #010001"&gt;Search&lt;/span&gt;.&lt;span style="color: #010001"&gt;Index&lt;/s
+</code></pre>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/12/17/ASP.NET%E8%B0%83%E7%94%A8%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81" title="ASP.NET调用存储过程示例代码">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2009/12/19/Linq+to+SQL+Like+Operator" title="Linq to SQL Like Operator">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>19 December 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

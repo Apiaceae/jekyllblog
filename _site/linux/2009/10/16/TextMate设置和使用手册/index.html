@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>TextMate设置和使用手册</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>TextMate设置和使用手册 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <h1 id="textmatebasicstutorial">TextMate Basics Tutorial</h1>
+
+
+<p>
+Welcome to the TextMate Basics Tutorial. After having <a href="http://projects.serenity.de/textmate/tutorials/setup/">setup your TextMate</a>, this Tutorial will show you around the basic features of TextMate. This is a must for everyone who wants to use TextMate seriously. 
+</p>
+
+
+<blockquote>
+    <p>
+    This Tutorial starts rather unusually with an insight of TextMates Extensibility and Bundle System and also will show off the built-in editing features. I find this &ldquo;Understanding TextMate&rdquo; Section is essential for every user. <br />
+    &mdash; <em>Soryu</em> 
+    </p>
+</blockquote>
+
+
+<p>
+<strong>Notice:</strong> Part of this Tutorial is available in Japanese at <a href="http://www.fraction.jp/log/archives/2007/05/1132">fraction.jp</a>. 有難う Yuanying! 
+</p>
+
+
+<h2 id="content">Content</h2>
+
+
+<ul>
+    <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#understandingtextmate" title="Understanding TextMate">Understanding TextMate</a> 
+    <ul>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#bundles" title="Bundles">Bundles</a> 
+        <ul>
+            <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#commands" title="Commands">Commands</a></li>
+            <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#snippets" title="Snippets">Snippets</a></li>
+            <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#macros" title="Macros">Macros</a></li>
+            <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#languages" title="Languages">Languages</a></li>
+            <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#preferenceitems" title="Preference Items">Preference Items</a></li>
+            <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#templates" title="Templates">Templates</a></li>
+        </ul>
+        </li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#specialbundles" title="Special Bundles">Special Bundles</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#conclusionsofar" title="Conclusion so far">Conclusion so far</a></li>
+    </ul>
+    </li>
+    <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#harnessingthepower" title="Harnessing the power">Harnessing the power</a></li>
+    <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#editingtext" title="Editing Text">Editing Text</a> 
+    <ul>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#caretmovement" title="Caret movement">Caret Movement</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#selections" title="Selections">Selections</a> 
+        <ul>
+            <li><a href="http://projects.serenity.de/textmate/tutorials/basics/img/column_selection.jpg">Column Selection</a></li>
+        </ul>
+        </li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#indents" title="Indents">Indents</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#copypaste" title="Copy/Paste">Copy/Paste</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#wordcompletion" title="Word Completion">Word Completion</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#findreplace" title="Find &amp; Replace">Find &amp; Replace</a> 
+        <ul>
+            <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#incrementalsearch" title="Incremental Search">Incremental Search</a></li>
+        </ul>
+        </li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#transposingandconversions" title="Transposing and Conversions">Transposing and Conversions</a> 
+        <ul>
+            <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#tabsandspaces" title="Tabs and Spaces">Tabs and Spaces</a></li>
+            <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#formatting" title="Formatting">Formatting</a></li>
+        </ul>
+        </li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#specialeditmodes" title="Special Edit Modes">Special Edit Modes</a></li>
+    </ul>
+    </li>
+    <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#runningshellcommands" title="Running Shell Commands">Running Shell Commands</a></li>
+    <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#commonbundles" title="Common Bundles">Common Bundles</a> 
+    <ul>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#commonbundleshortcuts" title="Common Bundle Shortcuts">Common Bundle Shortcuts</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/img/text_bundle.jpg">Text Bundle</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#sourcebundle" title="Source Bundle">Source Bundle</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#diffbundle" title="Diff Bundle">Diff Bundle</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#mathbundle" title="Math bundle">Math Bundle</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#subversionbundle" title="Subversion Bundle">Subversion Bundle</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#textmatebundle" title="TextMate Bundle">TextMate Bundle</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#todobundle" title="TODO Bundle">TODO Bundle</a></li>
+    </ul>
+    </li>
+    <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#navigation" title="Navigation">Navigation</a> 
+    <ul>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#bookmarks" title="Bookmarks">Bookmarks</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#textcodefolding" title="Text/Code Folding">Text/Code Folding</a></li>
+        <li><a href="http://projects.serenity.de/textmate/tutorials/basics/#structure" title="Structure">Structure</a></li>
+    </ul>
+    </li>
+</ul>
+
+
+<hr />
+
+
+<h2 id="understandingtextmate">Understanding TextMate</h2>
+
+
+<p>
+When you edit a file, TextMate recognizes the file type (in most cases) and provides several specific commands to work with that file. 
+</p>
+
+
+<p>
+Let&rsquo;s assume you are editing an <code>HTML</code> file. TextMate will recognize the following extensions as <code>HTML</code>: <code>html</code>, <code>htm</code>, <code>shtml</code>, <code>xhtml</code>, <code>phtml</code>, <code>php</code>, <code>inc</code>, <code>tmpl</code>, <code>tpl</code><a id="fnref:php_as_html" href="http://projects.serenity.de/textmate/tutorials/basics/#fn:php_as_html" class="footnote">1</a>. Furthermore, if your file starts with an <code>HTML DOCTYPE</code> declaration it will be recognized as well. <br />
+Based on that the file is syntax-highlighted according to the &lsquo;HTML Language Grammar&rsquo; that is defined in the &lsquo;HTML Bundle&rsquo;. 
+</p>
+
+
+<p>
+Let&rsquo;s take a look what those Bundles are about, shall we? 
+</p>
+
+
+<h3 id="bundles">Bundles</h3>
+
+
+<p>
+Bundles are Containers for certain functionality, mostly Language-centered. Feel free to open the &lsquo;Bundle Editor&rsquo; from within TextMate with <code>???B (Window &rarr; Show Bundle Editor)</code>. 
+</p>
+
+
+<p>
+<img id="bundleeditor" class="shot" src="http://projects.serenity.de/textmate/tutorials/basics/img/bundle_editor.jpg" alt="Bundle Editor" title="Bundle Editor" width="613" height="431" /> 
+</p>
+
+
+<p><p>
+I have selected the first Command in the &lsquo;HTML Bundle&rsquo;. <em>Don&rsquo;t be scared right off by the funny program source in the text-field to the right.</em> <br />
+All the items that are grouped under the &ldquo;HTML&rdquo; headline on the left are specific things to <code>HTML</code>. There are <strong>Commands</strong> that will transform characters or open a window with Documentation for an <code>HTML Tag</code>, <strong>Drag Commands</strong> that will let you Drag&rsquo;n&amp;rs</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/10/16/EOL%E7%A8%8B%E5%BA%8F%E5%87%BA%E9%94%99%E5%90%8E%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%96%B9%E6%B3%95" title="EOL程序出错后批量处理数据库的方法">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2009/10/16/10%E4%B8%AA%E5%85%8D%E8%B4%B9%E7%9A%84%E5%9B%BE%E8%A1%A8%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81" title="10个免费的图表生成代码">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>16 October 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>如何更新Dell服务器的BIOS及Locale问题</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>如何更新Dell服务器的BIOS及Locale问题 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <h1>Install libsmbios</h1>
+
+<p>,,,
+$ apt-get update    (not always necessary)</p>
+
+<p>$ apt-get install libsmbios-bin
+,,,</p>
+
+<h1>Get the System ID</h1>
+
+<p>$ getSystemId
+,,,
+Libsmbios:    0.12.1</p>
+
+<p>System ID: 0x01DD</p>
+
+<p>Service Tag:  DT6WLB1</p>
+
+<p>Express Service Code: 30063287773</p>
+
+<p>Product Name: Dell DM061</p>
+
+<p>BIOS Version: 2.3.2</p>
+
+<p>Vendor:       Dell Inc.</p>
+
+<p>Is Dell:      1
+,,,</p>
+
+<p>Download the latest BIOS ".HDR" file for this system. Go here: <a class="external free" href="http://linux.dell.com/repo/firmware/bios-hdrs/" rel="nofollow">http://linux.dell.com/repo/firmware/bios-hdrs/</a>. Scroll down the list to find a directory matching the System ID from the previous step. The directory will be named: system_bios_ven_0x1028_dev<em><strong>SYSTEM_ID</strong></em>version_<strong>BIOS_VERSION</strong>. Go into this directory and download the file, "bios.hdr".</li>
+</ul></p>
+
+<p><span style="font-family: sans-serif; font-size: 13px; line-height: 19px;"><span style="font-family: sans-serif; font-size: 13px; line-height: 19px;"></span></span></p>
+
+
+<ul>
+<li>load the <strong>dell_rbu</strong> driver</li>
+</ul>
+
+
+<p><span style="font-family: sans-serif; font-size: 13px; line-height: 19px;"><span style="font-family: sans-serif; font-size: 13px; line-height: 19px;"></span></span></p>
+
+
+<pre># modprobe dell_rbu
+</pre>
+
+
+<p><span style="font-family: sans-serif; font-size: 13px; line-height: 19px;"><span style="font-family: sans-serif; font-size: 13px; line-height: 19px;"></span></span></p>
+
+
+<ul>
+<li>update the bios</li>
+</ul>
+
+
+<p><span style="font-family: sans-serif; font-size: 13px; line-height: 19px;"><span style="font-family: sans-serif; font-size: 13px; line-height: 19px;"></span></span></p>
+
+
+<pre># dellBiosUpdate -u -f ./bios.hdr-2.3.2 
+Supported RBU type for this system: (MONOLITHIC)
+Using RBU v2 driver. Initializing Driver. 
+Setting RBU type in v2 driver to: MONOLITHIC
+Prep driver for data load.
+Writing RBU data (4096bytes/dot): ............................
+..............................................................
+.......................
+Notify driver data is finished.
+Activate CMOS bit to notify BIOS that update is ready on next boot.
+Update staged sucessfully. BIOS update will occur on next reboot.
+</pre>
+
+
+<p><span style="font-family: sans-serif; font-size: 13px; line-height: 19px;"><span style="font-family: sans-serif; font-size: 13px; line-height: 19px;"></span></span></p>
+
+
+<ul>
+<li>reboot the system</li>
+</ul>
+
+
+<p><span style="font-family: sans-serif; font-size: 13px; line-height: 19px;"><span style="font-family: sans-serif; font-size: 13px; line-height: 19px;"></span></span></p>
+
+
+<pre># reboot
+</pre>
+
+
+<p><a href="http://linux.dell.com/wiki/index.php/Tech/libsmbios_dellBiosUpdate">http://linux.dell.com/wiki/index.php/Tech/libsmbios_dellBiosUpdate</a></p>
+
+
+<p><span style="font-family: sans-serif; font-size: 13px; line-height: 19px;"></span>&nbsp;</p>
+
+
+<h2 class="title content-title">典型错误：locale.Error：unsupported locale setting</h2>
+
+
+<div id="content" class="content mod-cs-content text-content clearfix"><strong>&nbsp;locale.Error：unsupported locale setting<br /><br /><br /><br /></strong><strong>1、错误提出</strong><br />（1）locale指令运行出现的错误信息<br />locale：Cannot set LC_CTYPE to default locale： No such file or directory<br />locale：Cannot set LC_MESSAGES to default locale： No such file or directory<br />locale：Cannot set LC_ALL to default locale： No such file or directory<br />（2）setup指令运行出现的错误信息<br />locale.Error：unsupported locale setting，导致无法设置&ldquo;network configuration"<br />（3）yum指令运行出现的错误信息<br />Failed to set locale, defaulting to C<br /><img src="http://hiphotos.baidu.com/9812658/pic/item/03ca8c7109101d2c8601b07b.jpg" alt="" /><br /><img src="http://hiphotos.baidu.com/9812658/pic/item/61139699c5fff585c8eaf47b.jpg" alt="" /><br /><img src="http://hiphotos.baidu.com/9812658/pic/item/982718a3fbd4dcbb4610647b.jpg" alt="" /><br /><br /><br /><strong>2、分析原因</strong><br />locale是用来设置软件运行的语言环境，所以语言环境设置有问题<br /><br /><strong>3、解决故障<br /></strong>重新设置语言环境，最简单的解决办法，例如：<br />[root@Mylinux ~]#&nbsp; echo "export&nbsp; LC_ALL=en_US.UTF-8"&nbsp; &gt;&gt;&nbsp;&nbsp; /home/XXX/.bash_profile（特定用户）<br />或者<br />[root@Mylinux ~]#&nbsp; echo "export LC_ALL=en_US.UTF-8"&nbsp; &gt;&gt;&nbsp; /etc/profile（所有用户）<br />[root@Mylinux ~]#&nbsp; exit<br />然后重新登录，使用locale指令查看变量<br /><img src="http://hiphotos.baidu.com/9812658/pic/item/58f80bee1050cc1762d09ffa.jpg" alt="" /><br /><br />
+
+*关于locale的设置，请查阅文章：《<span style="text-decoration: underline;"><strong><a href="http://hi.baidu.com/9812658/blog/item/d0021e33c0b32aa35fdf0e6c.html" target="_blank">Linux系统locale的设置</a></strong></span></div>
+
+
+<p><a href="http://hi.baidu.com/linuxtrip/item/02b8c7774d7a70215d17893d">http://hi.baidu.com/linuxtrip/item/02b8c7774d7a70215d17893d</a></p>
+
+
+<p>&nbsp;</p>
+
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2012/07/18/ubuntu-drupal7-apache-solr-steps" title="Ubuntu为drupal7配置Apache Solr详细步骤">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/%E6%8A%80%E5%B7%A7/2012/10/23/vim-formmatter-config" title="Vim格式化代码">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>22 October 2012</span></div>
+
+  
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    
+
+
+  
+     
+    	<li><a href="/tags.html#服务器-ref">服务器 <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

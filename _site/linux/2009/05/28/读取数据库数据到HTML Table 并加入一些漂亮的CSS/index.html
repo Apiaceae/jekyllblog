@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>读取数据库数据到HTML Table 并加入一些漂亮的CSS</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>读取数据库数据到HTML Table 并加入一些漂亮的CSS <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <h2>效果图</h2>
+
+
+<p>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/edb0d7de12e0/352A5F48/20090528_00079.jpg"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="2009-05-28_00079" border="0" alt="2009-05-28_00079" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/edb0d7de12e0/78262DB5/20090528_00079_thumb.jpg" width="644" height="214" /></a> </p>  <h2>Default.aspx</h2>  <pre class="csharpcode"><span class="asp">&lt;%@ Page Language=&quot;C#&quot; AutoEventWireup=&quot;true&quot; CodeFile=&quot;Default.aspx.cs&quot; Inherits=&quot;_Default&quot; %&gt;</span></p>
+
+<p><span class="kwrd">&lt;!</span><span class="html">DOCTYPE</span> <span class="attr">html</span> <span class="attr">PUBLIC</span> <span class="kwrd">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="kwrd">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span><span class="kwrd">&gt;</span>
+<span class="kwrd">&lt;</span><span class="html">html</span> <span class="attr">xmlns</span><span class="kwrd">=&quot;http://www.w3.org/1999/xhtml&quot;</span><span class="kwrd">&gt;</span>
+<span class="kwrd">&lt;</span><span class="html">head</span> <span class="attr">runat</span><span class="kwrd">=&quot;server&quot;</span><span class="kwrd">&gt;</span>
+    <span class="kwrd">&lt;</span><span class="html">title</span><span class="kwrd">&gt;&lt;/</span><span class="html">title</span><span class="kwrd">&gt;</span>
+    <span class="kwrd">&lt;</span><span class="html">style</span><span class="kwrd">&gt;</span></pre></p>
+
+<pre class="csharpcode"><span class="kwrd">//见附件</span></pre>
+
+
+
+
+<pre class="csharpcode"><span class="kwrd"></span><span class="kwrd">&lt;/</span><span class="html">style</span><span class="kwrd">&gt;</span>
+<span class="kwrd">&lt;/</span><span class="html">head</span><span class="kwrd">&gt;</span>
+<span class="kwrd">&lt;</span><span class="html">body</span><span class="kwrd">&gt;</span>
+    <span class="kwrd">&lt;</span><span class="html">form</span> <span class="attr">id</span><span class="kwrd">=&quot;form1&quot;</span> <span class="attr">runat</span><span class="kwrd">=&quot;server&quot;</span><span class="kwrd">&gt;</span>
+    <span class="kwrd">&lt;</span><span class="html">div</span><span class="kwrd">&gt;</span>
+        <span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">id</span><span class="kwrd">=&quot;display&quot;</span> <span class="attr">runat</span><span class="kwrd">=&quot;server&quot;</span><span class="kwrd">&gt;</span>
+            中国高等植物名录<span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span>
+    <span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span>
+    <span class="kwrd">&lt;/</span><span class="html">form</span><span class="kwrd">&gt;</span>
+<span class="kwrd">&lt;/</span><span class="html">body</span><span class="kwrd">&gt;</span>
+<span class="kwrd">&lt;/</span><span class="html">html</span><span class="kwrd">&gt;</span></pre>
+
+
+
+
+<div style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: none; padding-top: 0px" id="scid:fb3a1972-4489-4e52-abe7-25a00bb07fdf:92d50799-44df-4802-9477-a72fd58361d7" class="wlWriterEditableSmartContent"><p> <a href="http://blog.cnpc.ac.cn/Blogs/file.axd?file=WindowsLiveWriter/edb0d7de12e0/12F253C2/table_design.css" target="_blank">CSS File</a></p></div>
+
+
+
+
+
+
+<h2>Default.aspx.cs</h2>
+
+
+
+
+<p>&#160;</p>
+
+
+
+
+<p><div class="csharpcode">
+  <pre class="alt"><span class="kwrd">using</span> System;</pre></p>
+
+<p>  <pre><span class="kwrd">using</span> System.Data;</pre></p>
+
+<p>  <pre class="alt"><span class="kwrd">using</span> System.Data.SqlClient;</pre></p>
+
+<p>  <pre><span class="kwrd">using</span> System.Web.Configuration;</pre></p>
+
+<p>  <pre class="alt">&#160;</pre></p>
+
+<p>  <pre><span class="kwrd">public</span> <span class="kwrd">partial</span> <span class="kwrd">class</span> _Default : System.Web.UI.Page</pre></p>
+
+<p>  <pre class="alt">{</pre></p>
+
+<p>  <pre>    <span class="kwrd">protected</span> <span class="kwrd">void</span> Page_Load(<span class="kwrd">object</span> sender, EventArgs e)</pre></p>
+
+<p>  <pre class="alt">    {</pre></p>
+
+<p>  <pre>        <span class="rem">// Connection set up</span></pre></p>
+
+<p>  <pre class="alt">        String strConnection = WebConfigurationManager.ConnectionStrings[<span class="str">&quot;CNPCEditConnectionString&quot;</span>].ConnectionString;</pre></p>
+
+<p>  <pre>&#160;</pre></p>
+
+<p>  <pre class="alt">        SqlConnection objConnection = <span class="kwrd">new</span> SqlConnection(strConnection);</pre></p>
+
+<p>  <pre>        String strSQL = <span class="str">&quot;SELECT FamilyName, FamilyNameCh,FamilyID from Family&quot;</span>;</pre></p>
+
+<p>  <pre class="alt">        <span class="rem">// DataAdapter setup</span></pre></p>
+
+<p>  <pre>        SqlDataAdapter objAdapter = <span class="kwrd">new</span> SqlDataAdapter(strSQL, objConnection);</pre></p>
+
+<p>  <pre class="alt">        <span class="rem">// DataSet &amp; Adapter &amp; Table</span></pre></p>
+
+<p>  <pre>        DataSet objDataSet = <span class="kwrd">new</span> DataSet();</pre></p>
+
+<p>  <pre class="alt">        objAdapter.Fill(objDataSet, <span class="str">&quot;Family&quot;</span>);</pre></p>
+
+<p>  <pre>        String strResultsHolder;</pre></p>
+
+<p>  <pre class="alt">        strResultsHolder = <span class="str">&quot;&lt;table&gt;&quot;</span>;</pre></p>
+
+<p>  <pre>        strResultsHolder += <span class="str">&quot;&lt;tr&gt;&quot;</span>;</pre></p>
+
+<p>  <pre class="alt">        <span class="rem">//Change the column header name</span></pre></p>
+
+<p>  <pre>        objDataSet.Tables[<span class="str">&quot;Family&quot;</span>].Columns[0].ColumnName = <span class="str">&quot;科学名&quot;</span>;</pre></p>
+
+<p>  <pre class="alt">        objDataSet.Tables[<span class="str">&quot;Family&quot;</span>].Columns[1].ColumnName = <span class="str">&quot;科中文名&quot;</span>;</pre></p>
+
+<p>  <pre>        objDataSet.Tables[<span class="str">&quot;Family&quot;</span>].Columns[2].ColumnName = <span class="str">&quot;科编号&quot;</span>;</pre></p>
+
+<p>  <pre class="alt">        <span class="kwrd">foreach</span> (DataColumn c <span class="kwrd">in</span> objDataSet.Tables[<span class="str">&quot;Family&quot;</span>].Columns)</pre></p>
+
+<p>  <pre>        {</pre></p>
+
+<p>  <pre class="alt">            strResultsHolder += <span class="str">&quot;&lt;td&gt;&quot;</span> + c.ColumnName + <span class="str">&quot;&lt;/td&gt;&quot;</span>;</pre></p>
+
+<p>  <pre>        }</pre></p>
+
+<p>  <pre class="alt">        strResultsHolder += <span class="str">&quot;&lt;/tr&gt;&quot;</span>;</pre></p>
+
+<p>  <pre>        <span class="kwrd">foreach</span> (DataRow r <span class="kwrd">in</span> objDataSet.Tables[<span class="str">&quot;Family&quot;</span>].Rows)</pre></p>
+
+<p>  <pre class="alt">        {</pre></p>
+
+<p>  <pre>            strResultsHolder += <span class="str">&quot;&lt;tr&gt;&lt;td width=5%&gt;&quot;</span> + r[<span class="str">&quot;科学名&quot;</span>] + <span class="str">&quot;&lt;td width=5%&gt;&quot;</span> + r[<span class="str">&quot;科中文名&quot;</span>] + <span class="str">&quot;&lt;td width=5%&gt;&quot;</span> + r[<span class="str">&quot;科编号&quot;</span>] + <span class="str">&quot;&lt;/td&gt;&lt;</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/05/27/%E4%B9%85%E8%BF%9D%E7%9A%84DELTA%E7%B3%BB%E7%BB%9F%E6%9C%89%E5%92%8C%E5%A4%A7%E5%AE%B6%E8%A7%81%E9%9D%A2%E4%BA%86" title="久违的DELTA系统有和大家见面了">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2009/06/02/%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E7%9F%A5%E8%AF%86%E7%82%B9" title="数据建模知识点">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>28 May 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

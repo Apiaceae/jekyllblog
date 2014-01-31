@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ASP.NET MVC模式学习笔记(一)</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>ASP.NET MVC模式学习笔记(一) <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/5D2050FA/20091030_223622.png"><img title="2009-10-30_223622" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="383" alt="2009-10-30_223622" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/2C8F63F3/20091030_223622_thumb.png" width="644" border="0" /></a> </p>
+
+
+<p>  <p>在一对多的关系中(如上图),Dinner类有一个强类型的RSVP集合；而RSVP类有一个强类型的Dinner属性。这样两个类间通过这关系进行相互的数据访问</p>  <h1>模型(Model)</h1>  <p>NerdDinnerDataContext Class</p>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/08441A57/20091030_225046.png"><img title="2009-10-30_225046" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="366" alt="2009-10-30_225046" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/74B2F272/20091030_225046_thumb.png" width="644" border="0" /></a> </p>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/24954647/20091030_231313.png"><img title="2009-10-30_231313" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="379" alt="2009-10-30_231313" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/1D0C678B/20091030_231313_thumb.png" width="644" border="0" /></a></p>  <p>&#160;</p>  <p>&#160;</p>  <p>DinnerRepository dinnerRepository = new DinnerRepository();    <br />// Retrieve specific dinner by its DinnerID     <br />Dinner dinner = dinnerRepository.GetDinner(5);     <br />// Mark dinner to be deleted</p>  <pre>DinnerRepository dinnerRepository = <span style="color: #0000ff">new</span> DinnerRepository();
+<span style="color: #008000">// Retrieve specific dinner by its DinnerID</span>
+Dinner dinner = dinnerRepository.GetDinner(5);
+<span style="color: #008000">// Mark dinner to be deleted</span>
+dinnerRepository.Delete(dinner);
+<span style="color: #008000">// Persist changes</span>
+dinnerRepository.Save();</pre></p>
+
+<p>
+  <br />dinnerRepository.Delete(dinner); 
+
+  <br />// Persist changes 
+
+  <br />dinnerRepository.Save();</p>
+
+
+
+
+<h1>控制器和视图</h1>
+
+
+
+
+<p>传统的网络应用框架，比如ASP, PHP, ASP.NET表单程序都是将传入的Url对应到磁盘上的文件。例如：Products.aspx或者Products.php。MVC框架则是把Url对应到一个类的方法上。</p>
+
+
+
+
+<p>With traditional web frameworks (classic ASP, PHP, ASP.NET Web Forms, etc), incoming URLs are 
+  <br />typically mapped to files on disk. For example: a request for a URL like &quot;/Products.aspx&quot; or 
+
+  <br />&quot;/Products.php” might be processed by a “Products.aspx” or “Products.php” file. 
+
+  <br />Web-based MVC frameworks map URLs to server code in a slightly different way. Instead of mapping 
+
+  <br />incoming URLs to files, they instead map URLs to methods on classes. These classes are called 
+
+  <br />“Controllers” and they are responsible for processing incoming HTTP requests, handling user input, 
+
+  <br />retrieving and saving data, and determining the response to send back to the client (display HTML, 
+
+  <br />download a file, redirect to a different URL, etc).</p>
+
+
+
+
+<h4>理解ASP.NET MVC路由(Understanding ASP.NET MVC Routing)</h4>
+
+
+
+
+<p>路由规则保存在Global.asax文件中，如下所示：</p>
+
+
+
+
+<pre class="code"><span style="color: blue">using </span><span style="color: #010001">System</span>;
+<span style="color: blue">using </span><span style="color: #010001">System</span>.<span style="color: #010001">Collections</span>.<span style="color: #010001">Generic</span>;
+<span style="color: blue">using </span><span style="color: #010001">System</span>.<span style="color: #010001">Linq</span>;
+<span style="color: blue">using </span><span style="color: #010001">System</span>.<span style="color: #010001">Web</span>;
+<span style="color: blue">using </span><span style="color: #010001">System</span>.<span style="color: #010001">Web</span>.<span style="color: #010001">Mvc</span>;
+<span style="color: blue">using </span><span style="color: #010001">System</span>.<span style="color: #010001">Web</span>.<span style="color: #010001">Routing</span>;
+
+<span style="color: blue">namespace </span><span style="color: #010001">NerdDinner
+</span>{
+    <span style="color: green">// Note: For instructions on enabling IIS6 or IIS7 classic mode, 
+    // visit http://go.microsoft.com/?LinkId=9394801
+
+    </span><span style="color: blue">public class </span><span style="color: #2b91af">MvcApplication </span>: <span style="color: #010001">System</span>.<span style="color: #010001">Web</span>.<span style="color: #2b91af">HttpApplication
+    </span>{
+        <span style="color: blue">public static void </span><span style="color: #010001">RegisterRoutes</span>(<span style="color: #2b91af">RouteCollection </span><span style="color: #010001">routes</span>)
+        {
+            <span style="color: #010001">routes</span>.<span style="color: #010001">IgnoreRoute</span>(<span style="color: #a31515">&quot;{resource}.axd/{*pathInfo}&quot;</span>);
+
+            <span style="color: #010001">routes</span>.<span style="color: #010001">MapRoute</span>(
+                <span style="color: #a31515">&quot;Default&quot;</span>,                                              <span style="color: green">// Route name
+                </span><span style="color: #a31515">&quot;{controller}/{action}/{id}&quot;</span>,                           <span style="color: green">// URL with parameters
+                </span><span style="color: blue">new </span>{ <span style="color: #010001">controller </span>= <span style="color: #a31515">&quot;Home&quot;</span>, <span style="color: #010001">action </span>= <span style="color: #a31515">&quot;Index&quot;</span>, <span style="color: #010001">id </span>= <span style="color: #a31515">&quot;&quot; </span>}  <span style="color: green">// Parameter defaults
+            </span>);
+
+        }
+
+        <span style="color: blue">protected void </span><span style="color: #010001">Application_Start</span>()
+        {
+            <span style="color: #010001">RegisterRoutes</span>(<span style="color: #2b91af">RouteTable</span>.<span style="color: #010001">Routes</span>);
+        }
+    }
+}</pre>
+
+
+<p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/093F325D/20091031_180343.png"><img title="2009-10-31_180343" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="284" alt="2009-10-31_180343" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/175D5FB3/20091031_180343_thumb.png" width="644" border="0" /></a> <a href="http://11011.net/software/vspaste"></a></p>
+
+<pre><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/379D17C5/20091031_223007.png"><img title="2009-10-31_223007" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="140" alt="2009-10-31_223007" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/75BF1379/20091031_223007_thumb.png" width="644" border="0" /></a> </pre>
+
+
+
+
+<p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/28FFAC9E/20091031_223729.png"><img title="2009-10-31_223729" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="129" alt="2009-10-31_223729" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ASP.NETMVC/47D8C4FA/20091031_223729_thumb.png" width="644" border="0" /></a> </p>
+
+
+
+
+<p><pre class="code"><span style="color: blue">&lt;</span><span style="color: #a31515">p</span>&lt;span style=</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/10/30/EOL%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" title="EOL系统的数据结构">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2009/11/03/%E8%AE%A9%E4%BD%A0%E4%B8%80%E7%94%9F%E9%83%BD%E5%8F%97%E7%94%A8%E7%9A%8485%E5%8F%A5%E8%AF%9D" title="让你一生都受用的85句话">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>01 November 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

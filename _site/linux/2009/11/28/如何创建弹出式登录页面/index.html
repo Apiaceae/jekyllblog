@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>如何创建弹出式登录页面</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>如何创建弹出式登录页面 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <p>
+1、创建一个网站；
+</p>
+
+
+<p>
+2、添加母板页MasterPage.master;
+</p>
+
+
+<p>
+3、WebConfig文件添加如下配置：
+</p>
+
+
+<pre class="code">
+<span style="color: blue">&lt;</span><span style="color: #a31515">authentication </span><span style="color: red">mode</span><span style="color: blue">=</span>&quot;<span style="color: blue">Forms</span>&quot;<span style="color: blue">/&gt;
+&lt;</span><span style="color: #a31515">authorization</span><span style="color: blue">&gt;
+&lt;</span><span style="color: #a31515">deny </span><span style="color: red">users</span><span style="color: blue">=</span>&quot;<span style="color: blue">?</span>&quot;<span style="color: blue">/&gt;
+&lt;</span><span style="color: #a31515">allow </span><span style="color: red">users</span><span style="color: blue">=</span>&quot;<span style="color: blue">*</span>&quot;<span style="color: blue">/&gt;
+&lt;/</span><span style="color: #a31515">authorization</span><span style="color: blue">&gt;</span>
+</pre>
+
+
+<pre class="code">
+<span style="color: blue">4、MaterPage.master.cs代码</span>
+</pre>
+
+
+<pre class="code">
+<span style="color: blue">using </span>System;
+<span style="color: blue">using </span>System.Web.UI.WebControls;
+<span style="color: blue">using </span>System.Web.Security;
+<span style="color: blue">public partial class </span><span style="color: #2b91af">MasterPage </span>: System.Web.UI.<span style="color: #2b91af">MasterPage
+</span>{
+<span style="color: blue">protected void </span>Page_Load(<span style="color: blue">object </span>sender, <span style="color: #2b91af">EventArgs </span>e)
+{
+<span style="color: green">// Popup dialog won&#39;t fire if user is already in.
+</span><span style="color: blue">if </span>(Request.IsAuthenticated)
+{
+LoginStatus1_ModalPopupExtender.Enabled = <span style="color: blue">false</span>;
+}
+<span style="color: blue">else
+</span>{
+LoginStatus1_ModalPopupExtender.Enabled = <span style="color: blue">true</span>;
+}
+}
+<span style="color: green">// When Login button clicked, authenticate user&#39;s crendential.
+</span><span style="color: blue">protected void </span>Login1_Authenticate(<span style="color: blue">object </span>sender, <span style="color: #2b91af">AuthenticateEventArgs </span>e)
+{
+<span style="color: green">// You can add authentication logic here.
+</span>e.Authenticated = ((Login1.UserName == <span style="color: #a31515">&quot;test&quot;</span>) &amp;&amp; (Login1.Password == <span style="color: #a31515">&quot;test&quot;</span>)) ? <span style="color: blue">true </span>: <span style="color: blue">false</span>;
+<span style="color: green">// If login failed, continue showing the popup dialog and failure text.
+</span><span style="color: blue">if </span>(!e.Authenticated)
+{
+LoginStatus1_ModalPopupExtender.Show();
+}
+}
+<span style="color: green">// When Cancel button clicked, hide the popup dialog.
+</span><span style="color: blue">protected void </span>btnCancel_Click(<span style="color: blue">object </span>sender, <span style="color: #2b91af">EventArgs </span>e)
+{
+LoginStatus1_ModalPopupExtender.Hide();
+}
+}
+</pre>
+
+
+<p><a href="http://11011.net/software/vspaste"></a></p>
+
+<p>
+网站文件夹结构如下图：
+</p>
+
+
+<p>
+<a href="/Blogs/image.axd?picture=WindowsLiveWriter/74f11c5e719d/1D93CEE8/20091128_092013.png"><img style="border: 0px none ; display: inline" src="/Blogs/image.axd?picture=WindowsLiveWriter/74f11c5e719d/78960E6E/20091128_092013_thumb.png" border="0" alt="2009-11-28_092013" title="2009-11-28_092013" width="318" height="484" /></a> 
+</p>
+
+
+<p>
+&nbsp;
+</p>
+
+
+<p>
+文章链接：<a href="http://aspalliance.com/1882_How_to_Create_an__ASPNET_Modal_Popup_Login.all" title="http://aspalliance.com/1882_How_to_Create_an__ASPNET_Modal_Popup_Login.all">http://aspalliance.com/1882_How_to_Create_an__ASPNET_Modal_Popup_Login.all</a>
+</p>
+
+
+<p>
+<a href="/Blogs/file.axd?file=2009%2f11%2fModalPopupLogin.rar">代码下载：ModalPopupLogin.rar (781.89 kb)</a>
+</p>
+
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/11/13/ASP.NET%E4%BD%BF%E7%94%A8MySql+connector5.2.7%E5%B0%8F%E9%97%AE%E9%A2%98" title="ASP.NET使用MySql connector5.2.7小问题">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2009/12/03/%E5%9C%A8UBUNTU%E4%B8%8B%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85rails%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83" title="在UBUNTU下自动安装rails运行环境">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>28 November 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

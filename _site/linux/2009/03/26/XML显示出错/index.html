@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>XML显示出错</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>XML显示出错 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <p>
+<img src="/Blogs/image.axd?picture=2009%2f3%2f2009-03-26_00014.png" alt="" width="638" height="113" /> 
+</p>
+
+
+<p>
+今天编译一些学习处理XML文档的代码，结果调试出现上图的错误。网络搜索的解决方案如下： 
+</p>
+
+
+<p>
+解决的方法是在命令行窗口(开始--运行--cmd)中输入&ldquo;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\aspnet_regiis.exe -i&rdquo;。这样问题就解决了。发现，在原先在IIS&gt;默认网站&gt;属性&gt;主目录&gt;配置&gt;映射应用程序映射中，比原先多出了许多扩展名，如我就需要运行了.aspx等，这样，在IIS中就注册完成了。<br />
+或者点开始--程序--Microsoft Visual Studio .net 2005--Visual Studio Tools--Visual Studio 命令提示行<br />
+在里面写aspnet_regiis.exe -i<br />
+重新注册IIS 
+</p>
+
+
+<p>
+不管用 
+</p>
+
+
+<p>
+&nbsp;示例代码如下： 
+</p>
+
+
+<p>
+using System;<br />
+using System.Collections.Generic;<br />
+using System.Web;<br />
+using System.Web.UI;<br />
+using System.Web.UI.WebControls;<br />
+using System.Xml;<br />
+using System.Xml.XPath; 
+</p>
+
+
+<p>
+public partial class UpdateXML : System.Web.UI.Page<br />
+{<br />
+&nbsp;&nbsp;&nbsp; protected void Page_Load(object sender, EventArgs e)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //Response.ContentType = &quot;txt/xml&quot;;//错误的问题就出在这里，注释掉就好了。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; string xmlPath = Request.PhysicalApplicationPath + @&quot;App_Data\Books.xml&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XmlDocument document = new XmlDocument();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; document.Load(xmlPath);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XPathNavigator navigator = document.CreateNavigator();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int count = navigator.Select(&quot;/bookstore/book&quot;).Count;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; navigator.MoveToChild(&quot;bookstore&quot;, &quot;&quot;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; navigator.MoveToChild(&quot;book&quot;, &quot;&quot;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int i = 0; i &lt; count; i++)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; navigator.MoveToChild(&quot;price&quot;, &quot;&quot;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; double discount = navigator.ValueAsDouble * (.1);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; navigator.CreateAttribute(&quot;&quot;,&quot;discount&quot;,&quot;&quot;,discount.ToString());<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; navigator.MoveToParent();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; navigator.MoveToNext();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; navigator.MoveToRoot();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response.Write(navigator.OuterXml);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+} 
+</p>
+
+
+<p>
+另外一段代码如下：
+</p>
+
+
+<p>
+using System;<br />
+using System.Collections.Generic;<br />
+using System.Linq;<br />
+using System.Web;<br />
+using System.Web.UI;<br />
+using System.Web.UI.WebControls;<br />
+using System.Xml;<br />
+using System.Xml.Schema;<br />
+using System.IO;
+</p>
+
+
+<p>
+public partial class Default3 : System.Web.UI.Page<br />
+{<br />
+&nbsp;&nbsp;&nbsp; protected void Page_Load(object sender, EventArgs e)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //Response.ContentType = &quot;text/xml&quot;;//<strong><em>注释掉也不管用，还是出现老问题<br />
+</em></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; string xmlFilePath = Request.PhysicalApplicationPath + @&quot;App_Data\Authors.xml&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XmlReader reader = XmlReader.Create(xmlFilePath);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XmlSchemaSet schemaSet = new XmlSchemaSet();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XmlSchemaInference schema = new XmlSchemaInference();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schemaSet = schema.InferSchema(reader);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; foreach (XmlSchema schemaObj in schemaSet.Schemas())<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schemaObj.Write(Response.Output);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}
+</p>
+
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/03/26/%E8%B0%83%E7%94%A8XPath%E6%98%BE%E7%A4%BAXML%E6%96%87%E6%A1%A3" title="调用XPath显示XML文档">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2009/03/26/%E5%90%8E%E5%88%86%E7%B1%BB%E5%AD%A6%E5%AE%B6%E7%9A%84%E6%97%B6%E4%BB%A3" title="后分类学家的时代">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>26 March 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

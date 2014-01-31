@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ExtJS登录界面</title>
+    
+    <meta name="author" content="Lisong Wang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/css/1.4.0/bootstrap.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">虎克的博客</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>ExtJS登录界面 <small>Supporting tagline</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <h2>效果图</h2>
+
+
+<p>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ExtJS/59879F4F/20090613_00084.jpg"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="2009-06-13_00084" border="0" alt="2009-06-13_00084" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ExtJS/31E12325/20090613_00084_thumb.jpg" width="240" height="127" /></a> </p>  <p><a href="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ExtJS/18791FEB/20090613_00085.jpg"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="2009-06-13_00085" border="0" alt="2009-06-13_00085" src="http://blog.cnpc.ac.cn/Blogs/image.axd?picture=WindowsLiveWriter/ExtJS/77F1E038/20090613_00085_thumb.jpg" width="244" height="138" /></a> </p>  <h2>Login.js代码</h2>  <pre class="code"><span style="color: green">/// &lt;reference path=&quot;vswd-ext_2.0.2.js&quot; /&gt;</p>
+
+<p></span>Ext.onReady(<span style="color: blue">function</span>() {
+    Ext.QuickTips.init();</p>
+
+<pre><code>&lt;span style="color: green"&gt;// Create a variable to hold our EXT Form Panel. 
+// Assign various config options as seen.     
+&lt;/span&gt;&lt;span style="color: blue"&gt;var &lt;/span&gt;login = &lt;span style="color: blue"&gt;new &lt;/span&gt;Ext.FormPanel({
+    labelWidth: 80,
+    url: &lt;span style="color: #a31515"&gt;'Default.aspx'&lt;/span&gt;,
+    frame: &lt;span style="color: blue"&gt;true&lt;/span&gt;,
+    title: &lt;span style="color: #a31515"&gt;'请登陆'&lt;/span&gt;,
+    defaultType: &lt;span style="color: #a31515"&gt;'textfield'&lt;/span&gt;,
+    monitorValid: &lt;span style="color: blue"&gt;true&lt;/span&gt;,
+    &lt;span style="color: green"&gt;// Specific attributes for the text fields for username / password. 
+    // The &amp;quot;name&amp;quot; attribute defines the name of variables sent to the server.
+    &lt;/span&gt;items: [{
+        fieldLabel: &lt;span style="color: #a31515"&gt;'用户名'&lt;/span&gt;,
+        name: &lt;span style="color: #a31515"&gt;'loginUsername'&lt;/span&gt;,
+        allowBlank: &lt;span style="color: blue"&gt;false
+    &lt;/span&gt;}, {
+        fieldLabel: &lt;span style="color: #a31515"&gt;'密码'&lt;/span&gt;,
+        name: &lt;span style="color: #a31515"&gt;'loginPassword'&lt;/span&gt;,
+        inputType: &lt;span style="color: #a31515"&gt;'password'&lt;/span&gt;,
+        allowBlank: &lt;span style="color: blue"&gt;false
+</code></pre>
+
+<p></span>}],</p>
+
+<pre><code>        &lt;span style="color: green"&gt;// All the magic happens after the user clicks the button     
+        &lt;/span&gt;buttons: [{
+            text: &lt;span style="color: #a31515"&gt;'登陆'&lt;/span&gt;,
+            formBind: &lt;span style="color: blue"&gt;true&lt;/span&gt;,
+            &lt;span style="color: green"&gt;// Function that fires when user clicks the button 
+            &lt;/span&gt;handler: &lt;span style="color: blue"&gt;function&lt;/span&gt;() {
+                login.getForm().submit({
+                    method: &lt;span style="color: #a31515"&gt;'POST'&lt;/span&gt;,
+                    waitTitle: &lt;span style="color: #a31515"&gt;'连接服务器'&lt;/span&gt;,
+                    waitMsg: &lt;span style="color: #a31515"&gt;'传送数据...'&lt;/span&gt;,
+
+                    &lt;span style="color: green"&gt;// Functions that fire (success or failure) when the server responds. 
+                    // The one that executes is determined by the 
+                    // response that comes from login.asp as seen below. The server would 
+                    // actually respond with valid JSON, 
+                    // something like: response.write &amp;quot;{ success: true}&amp;quot; or 
+                    // response.write &amp;quot;{ success: false, errors: { reason: 'Login failed. Try again.' }}&amp;quot; 
+                    // depending on the logic contained within your server script.
+                    // If a success occurs, the user is notified with an alert messagebox, 
+                    // and when they click &amp;quot;OK&amp;quot;, they are redirected to whatever page
+                    // you define as redirect. 
+
+                    &lt;/span&gt;success: &lt;span style="color: blue"&gt;function&lt;/span&gt;() {
+                        Ext.Msg.alert(&lt;span style="color: #a31515"&gt;'Status'&lt;/span&gt;, &lt;span style="color: #a31515"&gt;'Login Successful!'&lt;/span&gt;, &lt;span style="color: blue"&gt;function&lt;/span&gt;(btn, text) {
+                            &lt;span style="color: blue"&gt;if &lt;/span&gt;(btn == &lt;span style="color: #a31515"&gt;'ok'&lt;/span&gt;) {
+                                &lt;span style="color: blue"&gt;var &lt;/span&gt;redirect = &lt;span style="color: #a31515"&gt;'Default.aspx'&lt;/span&gt;;
+                                window.location = redirect;
+                            }
+                        });
+                    },
+
+                    &lt;span style="color: green"&gt;// Failure function, see comment above re: success and failure. 
+                    // 如果登录失败，弹出对话框。 
+
+                    &lt;/span&gt;failure: &lt;span style="color: blue"&gt;function&lt;/span&gt;(form, action) {
+                        &lt;span style="color: blue"&gt;if &lt;/span&gt;(action.failureType == &lt;span style="color: #a31515"&gt;'server'&lt;/span&gt;) {
+                            obj = Ext.util.JSON.decode(action.response.responseText);
+                            Ext.Msg.alert(&lt;span style="color: #a31515"&gt;'登陆失败!'&lt;/span&gt;, obj.errors.reason);
+                        } &lt;span style="color: blue"&gt;else &lt;/span&gt;{
+                            Ext.Msg.alert(&lt;span style="color: #a31515"&gt;'Warning!'&lt;/span&gt;, &lt;span style="color: #a31515"&gt;'Authentication server is unreachable : ' &lt;/span&gt;+ action.response.responseText);
+                        }
+                        login.getForm().reset();
+                    }
+                });
+            }
+</code></pre>
+
+<p>}]
+            });</p>
+
+<pre><code>        &lt;span style="color: green"&gt;// This just creates a window to wrap the login form. 
+        // The login object is passed to the items collection.       
+        &lt;/span&gt;&lt;span style="color: blue"&gt;var &lt;/span&gt;win = &lt;span style="color: blue"&gt;new &lt;/span&gt;Ext.Window({
+            layout: &lt;span style="color: #a31515"&gt;'fit'&lt;/span&gt;,
+            width: 300,
+            height: 150,
+            closable: &lt;span style="color: blue"&gt;false&lt;/span&gt;,
+            resizable: &lt;span style="color: blue"&gt;false&lt;/span&gt;,
+            plain: &lt;span style="color: blue"&gt;true&lt;/span&gt;,
+            border: &lt;span style="color: blue"&gt;false&lt;/span&gt;,
+            items: [login]
+        });
+        win.show();
+    });&lt;/pre&gt;
+</code></pre>
+
+<p><a href="http://11011.net/software/vspaste"></a></p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/linux/2009/06/02/%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E7%9F%A5%E8%AF%86%E7%82%B9" title="数据建模知识点">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/linux/2009/06/24/%E5%9C%B0%E4%B8%AD%E6%B5%B7%E6%B0%94%E5%80%99%E5%B8%A6%E7%94%9F%E7%89%A9%E5%8C%BA%E7%B3%BB%E7%9A%84%E8%B5%B7%E6%BA%90%E5%92%8C%E6%BC%94%E5%8C%96%E2%80%94%E6%95%B4%E5%90%88%E6%80%A7%E7%A0%94%E7%A9%B6%E7%9A%84%E5%B1%95%E6%9C%9B" title="地中海气候带生物区系的起源和演化—整合性研究的展望">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'apiaceaegit'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>13 June 2009</span></div>
+
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Lisong Wang 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+
